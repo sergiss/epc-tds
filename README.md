@@ -10,6 +10,7 @@ Simple, very fast and easy to use ;)
 
 const tds = require('epc-tds');
 var epc = tds.valueOf("3074257bf7194e4000001a85");
+console.log(epc.toHexString());
 
 ```
 
