@@ -22,7 +22,7 @@ console.log("Tag URI: "       + epc.toTagURI());
 
 ```
 
-### Encode
+### Encode Hex EPC
 ```js
 
 # e.g. 1: EAN + Serial
