@@ -1,64 +1,38 @@
 /*
 * EPC Tag Data Standard
-* Decode/Encode Examples
 * 2021 Sergio S.
 */
 
 "use strict";
 
-const { Epc } = require("./epc/epc");
-const { Sgtin96 } = require("./epc/sgtin/sgtin96");
+const Utils = require('./epc/utils/utils');
+const { Sgtin96 }  = require("./epc/sgtin/sgtin96");
+const { Sgtin198 } = require("./epc/sgtin/sgtin198");
+const { Sgln96 }   = require("./epc/sgln/sgln96");
+const { Sscc96 }   = require('./epc/sscc/sscc96');
+const { Grai96 }   = require('./epc/grai/grai96');
+const { Grai170 }  = require('./epc/grai/grai170');
 
-// ---------------------------------
-// ****** Decode from hex EPC ****** 
-// ---------------------------------
-// e.g. 1: SGTIN-96
-let epc = Epc.valueOf("3074257BF7194E4000001A85"); // sgtin-96
-console.log("** SGTIN-96 **")
-console.log("Type: " + epc.getType()); // TDS ID
-console.log("Filter: " + epc.getFilter()); // filter index
-console.log("Partition: " + epc.getPartition()); // partition index
-console.log("CompanyPrefix: " +  epc.getCompanyPrefix());
-console.log("ItemReference: " + epc.getItemReference());
-console.log("GTIN(EAN): " + epc.getGtin()); // ean
-console.log("HexEPC: " + epc.toHexString()); // HEX EPC
-console.log("Tag URI: " + epc.toTagURI());
-console.log("");
+function valueOf(hexEpc) {	
+	let header = Utils.hexToByte(hexEpc, 0); // first byte of EPC
+	switch (header) {
+	case Grai96.EPC_HEADER:
+		return new Grai96(hexEpc);
+	case Grai170.EPC_HEADER:
+		return new Grai170(hexEpc);
+	case Sscc96.EPC_HEADER:
+		return new Sscc96(hexEpc);
+	case Sgln96.EPC_HEADER:
+		return new Sgln96(hexEpc);
+	case Sgtin96.EPC_HEADER:
+		return new Sgtin96(hexEpc);
+	case Sgtin198.EPC_HEADER:
+		return new Sgtin198(hexEpc);
+	default:
+		throw new Error(`Unsupported EPC: '${hexEpc}'`);
+	}
+}
 
-// e.g. 2: SSCC-96
-epc = Epc.valueOf("317A7202CC164BA20B000000"); // sscc-96
-console.log("** SSCC-96 **")
-console.log("Filter: " + epc.getFilter()); // filter index
-console.log("Partition: " + epc.getPartition()); // partition index
-console.log("CompanyPrefix: " +  epc.getCompanyPrefix());
-console.log("SerialReference: " + epc.getSerialReference());
-console.log("SSCC(EAN): " + epc.getSscc()); // ean
-console.log("HexEPC: " + epc.toHexString()); // HEX EPC
-console.log("Tag URI: " + epc.toTagURI());
-console.log();
 
-// ----------------------------------------
-// ****** Encode Sgtin96 from values ******
-// ----------------------------------------
-// e.g. 1: EAN + Serial
-let sgtin = new Sgtin96().setFilter(3)
-                         .setPartition(5)
-                         .setGtin("00001234523457")
-                         .setSerial(1823342345);
-
-console.log("** SGTIN-96 **")
-console.log("HexEPC: "  + sgtin.toHexString()); // HEX EPC
-console.log("Tag URI: " + sgtin.toTagURI());
-console.log();
-
-// e.g. 2: (companyPrefix + ItemReference) + Serial
-sgtin = new Sgtin96().setFilter(3)
-                     .setPartition(5)
-                     .setCompanyPrefix(78952)
-                     .setItemReference(44235)
-                     .setSerial(1010011010);
-
-console.log("** SGTIN-96 **")
-console.log("HexEPC: "  + sgtin.toHexString()); // HEX EPC
-console.log("Tag URI: " + sgtin.toTagURI());
-console.log();
+exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sscc96, Grai96, Grai170, Utils };
+exports.valueOf = valueOf;
