@@ -1,6 +1,6 @@
 {
   "name": "epc-tds",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "main": "index.js",
   "directories": {
     "doc": "doc"
@@ -8,7 +8,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "EPC",
+    "RFID",
+    "TAG",
+    "GS1",
+    "Decode",
+    "Encode",
+    "Library",
+    "Barcode"
+  ],
   "author": "Sergio Soriano",
   "license": "MIT",
   "description": "EPC Tag Data Standard encoding and decoding library, written in javascript for Node.js",
