@@ -45,5 +45,5 @@ console.log("HexEPC: "  + epc2.toHexString()); // HEX EPC
 console.log("Tag URI: " + epc2.toTagURI());
 
 ```
-https://www.sergiosoriano.com
+https://www.sergiosoriano.com\
 2021 - Sergio Soriano
