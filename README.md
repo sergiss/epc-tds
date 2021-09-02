@@ -3,6 +3,8 @@ EPC Tag Data Standard encoding and decoding library, written in javascript for N
 
 Simple, very fast and easy to use ;)
 
+[![NPM Version][npm-image]][npm-url]
+
 ## Usage
 
 ### Automatic decoding of any standard
@@ -55,3 +57,5 @@ console.log("Tag URI: " + epc2.toTagURI());
 
 ```
 https://www.sergiosoriano.com
+
+[npm-url]: https://npmjs.org/package/epc-tds
