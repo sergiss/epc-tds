@@ -59,3 +59,4 @@ console.log("Tag URI: " + epc2.toTagURI());
 https://www.sergiosoriano.com
 
 [npm-url]: https://npmjs.org/package/epc-tds
+[npm-image]: https://img.shields.io/npm/v/epc-tds.svg
