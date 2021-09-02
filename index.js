@@ -1,5 +1,6 @@
 /*
 * EPC Tag Data Standard
+* Decode/Encode Examples
 * 2021 Sergio S.
 */
 
@@ -14,6 +15,7 @@ const { Sgtin96 } = require("./epc/sgtin/sgtin96");
 // e.g. 1: SGTIN-96
 let epc = Epc.valueOf("3074257BF7194E4000001A85"); // sgtin-96
 console.log("** SGTIN-96 **")
+console.log("Type: " + epc.getType()); // TDS ID
 console.log("Filter: " + epc.getFilter()); // filter index
 console.log("Partition: " + epc.getPartition()); // partition index
 console.log("CompanyPrefix: " +  epc.getCompanyPrefix());
