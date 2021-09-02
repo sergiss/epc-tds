@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { Gid96 } = require("./epc/gid/gid96.js");
 var tds = require("./index.js");
 
 let ITERATIONS = 10000;
@@ -112,5 +113,40 @@ function sgln96Test(n) {
 }
 time = test(sgln96Test, ITERATIONS);
 console.log("Test Sgln96 time: " + time);
+
+function sgln195Test(n) {
+    let epc, ean;
+    for(let i = 0; i < n; ++i) {
+        ean = tds.Utils.randomEan(13);
+        epc = new tds.Sgln195().setFilter(3).setPartition(6).setGln(ean).setExtension(tds.Utils.randomHex(tds.Sgln195.MAX_SERIAL_LEN));
+        epc = new tds.Sgln195(epc.toHexString());
+        if(ean !== epc.getGln()) {
+            throw Error(`Sgln195, expected GLN: ${ean}, current: ${epc.getGln()}`);
+        }
+    }
+    //console.log(epc.toHexString())
+    //console.log(epc.getGtin());
+}
+time = test(sgln195Test, ITERATIONS);
+console.log("Test Sgln195 time: " + time);
+
+
+function gid96Test(n) {
+    let epc;
+    for(let i = 0; i < n; ++i) {
+       
+        let manager = Math.floor(Math.random() * tds.Gid96.MAX_MANAGER);
+        let clazz   = Math.floor(Math.random() * tds.Gid96.MAX_CLASS);
+        let serial  = Math.floor(Math.random() * tds.Gid96.MAX_SERIAL);
+        epc = new tds.Gid96().setManager(manager).setClass (clazz).setSerial (serial);
+        epc = new tds.Gid96(epc.toHexString());
+        if(manager !== epc.getManager() || clazz !== epc.getClass() || serial != epc.getSerial()) {
+            throw Error(`Gid96, expected: [${manager}, ${clazz}, ${serial}] current: [${epc.getManager()}, ${epc.getClass()}, ${epc.getSerial()}]`);
+        }
+    }
+    //console.log(epc.toHexString())
+}
+time = test(gid96Test, ITERATIONS);
+console.log("Test Gid96 time: " + time);
 
 console.log("*** Test completed successfully! ***");

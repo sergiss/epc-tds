@@ -25,7 +25,7 @@ class Grai170 extends Epc {
 	static SERIAL_OFFSET    = 58;
 	static SERIAL_END       = Grai170.TOTAL_BITS;
 	static SERIAL_BITS      = 112;
-    	static MAX_SERIAL_LEN   = 16;
+    static MAX_SERIAL_LEN   = 16;
 	static CHAR_BITS = (Grai170.SERIAL_END - Grai170.SERIAL_OFFSET) / Grai170.MAX_SERIAL_LEN; // 7
 	
 	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:grai-170:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
@@ -45,7 +45,7 @@ class Grai170 extends Epc {
 	}
 
 	getType() {
-		return Type.SGTIN96;
+		return Type.GRAI170;
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Asset Type, Serial)

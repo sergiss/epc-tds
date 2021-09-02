@@ -53,7 +53,7 @@ class Grai96 extends Epc {
 	}
 
 	getType() {
-		return Type.SGTIN96;
+		return Type.GRAI96;
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Asset Type, Serial)
