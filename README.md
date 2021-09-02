@@ -5,6 +5,14 @@ Simple, very fast and easy to use ;)
 
 ## Usage
 
+### Automatic decoding of any standard
+```js
+
+const tds = require('epc-tds');
+var epc = tds.valueOf("3074257bf7194e4000001a85");
+
+```
+
 ### Decode Hex EPC
 ```js
 // Decode from Hex EPC
