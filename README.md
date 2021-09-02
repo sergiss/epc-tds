@@ -46,4 +46,5 @@ console.log("Tag URI: " + epc2.toTagURI());
 
 ```
 https://www.sergiosoriano.com
-\2021 - Sergio Soriano
+
+2021 - Sergio Soriano
