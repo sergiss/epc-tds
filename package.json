@@ -1,0 +1,15 @@
+{
+  "name": "epc-tds",
+  "version": "0.6.0",
+  "main": "index.js",
+  "directories": {
+    "epc": "epc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sergio Soriano",
+  "license": "MIT",
+  "description": "EPC Tag Data Standard encoding and decoding library, written in javascript for Node.js"
+}
