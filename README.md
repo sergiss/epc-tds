@@ -11,7 +11,7 @@ Simple, very fast and easy to use ;)
 ```js
 
 const tds = require('epc-tds');
-var epc = tds.valueOf("3074257bf7194e4000001a85");
+var epc = tds.valueOf("3074257BF7194E4000001A85");
 console.log(epc.toHexString());
 
 ```
