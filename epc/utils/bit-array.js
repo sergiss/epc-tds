@@ -153,7 +153,7 @@ class BitArray {
 
   setFromHexString(hex) { 
     if (hex.length & 0b1) { // odd check
-      hex = '0' + hex; // fix
+      hex = '0' + hex; // even hex
     }
     this.data = new Array(hex.length >> 1);
     for (let j = 0, i = 0; i < this.length; i++, j += 2) {
