@@ -93,12 +93,12 @@ class BitArray {
   }
 
   setString(value, startIndex, endIndex, charBits) {
-	for (let i = 0; i < value.length && (charBits = Math.min(charBits, endIndex - startIndex)) > 0; ++i) { // iterate bytes
-		this.set(value.charCodeAt(i), startIndex, startIndex += charBits);
-	}
-	for (; startIndex < endIndex; ++startIndex) { // clear remaining bits
-		this.clearBit(startIndex);
-	}
+    for (let i = 0; i < value.length && (charBits = Math.min(charBits, endIndex - startIndex)) > 0; ++i) { // iterate bytes
+      this.set(value.charCodeAt(i), startIndex, startIndex += charBits);
+    }
+    for (; startIndex < endIndex; ++startIndex) { // clear remaining bits
+      this.clearBit(startIndex);
+    }
   }
 
   /**
@@ -111,9 +111,9 @@ class BitArray {
   getString(startIndex, endIndex, charBits) {
     let b, result = "";
     for (let i = 0; (charBits = Math.min(charBits, endIndex - startIndex)) > 0; ++i) { // iterate bytes
-	if(b = this.get(startIndex, startIndex += charBits)) {
-		result += String.fromCharCode(b);
-	}
+      if(b = this.get(startIndex, startIndex += charBits)) {
+        result += String.fromCharCode(b);
+      }
     }
     return result;
   } 
@@ -153,11 +153,11 @@ class BitArray {
 
   setFromHexString(hex) { 
     if (hex.length & 0b1) { // odd check
-			hex = '0' + hex; // fix
-		}
+      hex = '0' + hex; // fix
+    }
     this.data = new Array(hex.length >> 1);
     for (let j = 0, i = 0; i < this.length; i++, j += 2) {
-	this.data[i] = BitArray.REVERSE_DEC_TABLE[hex.charCodeAt(j)] | (BitArray.REVERSE_DEC_TABLE[hex.charCodeAt(j+1)] << 4)
+      this.data[i] = BitArray.REVERSE_DEC_TABLE[hex.charCodeAt(j)] | (BitArray.REVERSE_DEC_TABLE[hex.charCodeAt(j+1)] << 4)
     }
     return this;
   }
