@@ -7,7 +7,7 @@ Simple, very fast and easy to use ;)
 
 ## Usage
 
-### Automatic decoding of any standard
+### Automatic decoding of any standard (SGTIN-96, SGTIN-198, SSCC-96, SGLN-96, SGLN-195, GRAI-96, GRAI-170 ...)
 ```js
 
 const tds = require('epc-tds');
