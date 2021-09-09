@@ -11,8 +11,16 @@ Simple, very fast and easy to use ;)
 ```js
 
 const tds = require('epc-tds');
-var epc = tds.valueOf("3074257BF7194E4000001A85");
+var epc = tds.valueOf("3074257BF7194E4000001A85"); // SGTIN-96
 console.log("Tag URI: " + epc.toTagURI());
+
+epc = tds.valueOf("3178E61C883950F59A000000"); // SSCC-96
+console.log("Tag URI: " + epc.toTagURI());
+
+epc = tds.valueOf("377A6BB0C1BDA6D9B664D1AB266D1AB266D1AB266D00"); // GRAI-170
+console.log("Tag URI: " + epc.toTagURI());
+
+    ...
 
 ```
 
