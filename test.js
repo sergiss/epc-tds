@@ -8,13 +8,46 @@
 const { Gid96 } = require("./epc/gid/gid96.js");
 var tds = require("./index.js");
 
-let ITERATIONS = 10000;
+const ITERATIONS = 10000;
 
 function test(t, n) {
     let startTime = new Date().getTime();
     t(n);
     return new Date().getTime() - startTime;
 }
+
+let time;
+function giai96Test(n) {
+    let epc, giai;
+    for(let i = 0; i < n; ++i) {
+        giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Giai96().setFilter(3).setPartition(6).setGiai(giai);
+        epc = new tds.Giai96(epc.toHexString());
+        if(giai !== epc.getGiai()) {
+            console.log(epc.toIdURI());
+            throw Error(`Giai96, expected GIAI: ${giai}, current: ${epc.getGiai()}`);
+        }
+    }
+    //console.log(epc.toHexString())
+}
+time = test(giai96Test, ITERATIONS);
+console.log("Test Giai96 time: " + time);
+
+function giai202Test(n) {
+    let epc, giai;
+    for(let i = 0; i < n; ++i) {
+        giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Giai202().setFilter(3).setPartition(6).setGiai(giai);
+        epc = new tds.Giai202(epc.toHexString());
+        if(giai !== epc.getGiai()) {
+            console.log(epc.toIdURI());
+            throw Error(`Giai202, expected GIAI: ${giai}, current: ${epc.getGiai()}`);
+        }
+    }
+    //console.log(epc.toHexString())
+}
+time = test(giai202Test, ITERATIONS);
+console.log("Test Giai202 time: " + time);
 
 function grai170Test(n) {
     let epc, grai;
@@ -30,7 +63,7 @@ function grai170Test(n) {
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
 }
-let time = test(grai170Test, ITERATIONS);
+time = test(grai170Test, ITERATIONS);
 console.log("Test Grai170 time: " + time);
 
 function grai96Test(n) {
