@@ -17,7 +17,7 @@
  
 class Grai170 extends Epc {
 
-	static EPC_HEADER = 0x33;
+	static EPC_HEADER = 0x37;
 
 	static TOTAL_BITS = 170;
 	static PARTITION_OFFSET = 11;
