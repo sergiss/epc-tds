@@ -17,7 +17,19 @@ class Epc extends BitArray {
         super(length);
     }
 
-    toTagURI() {
+	clone() {
+		throw new Error('Unimplemented method.');
+	}
+
+	getType() {
+		throw new Error('Unimplemented method.');
+	}
+
+	toTagURI() {
+        throw new Error('Unimplemented method.');
+    }
+
+	toIdURI() {
         throw new Error('Unimplemented method.');
     }
 
@@ -29,12 +41,8 @@ class Epc extends BitArray {
         throw new Error('Unimplemented method.');
     }
 
-    getTotalBits() {
-        throw new Error('Unimplemented method.');
-    }
-
     getHeader() {
-        return this.toTagURI;
+        throw new Error('Unimplemented method.');
     }
 
     /**
