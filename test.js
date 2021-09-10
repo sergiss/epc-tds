@@ -4,8 +4,6 @@
 */
 
 'use strict'
-
-const { Gid96 } = require("./epc/gid/gid96.js");
 var tds = require("./index.js");
 
 const ITERATIONS = 10000;
@@ -17,6 +15,22 @@ function test(t, n) {
 }
 
 let time;
+function gsrn96Test(n) {
+    let epc, gsrn;
+    for(let i = 0; i < n; ++i) {
+        gsrn = tds.Utils.randomEan(18);
+        epc = new tds.Gsrn96().setFilter(3).setPartition(6).setGsrn(gsrn);
+        epc = new tds.Gsrn96(epc.toHexString());
+        if(gsrn !== epc.getGsrn()) {
+            console.log(epc.toIdURI());
+            throw Error(`Gsrn96, expected GIAI: ${gsrn}, current: ${epc.getGsrn()}`);
+        }
+    }
+    //console.log(epc.toHexString())
+}
+time = test(gsrn96Test, ITERATIONS);
+console.log("Test Gsrn96 time: " + time);
+
 function giai96Test(n) {
     let epc, giai;
     for(let i = 0; i < n; ++i) {
@@ -162,7 +176,6 @@ function sgln195Test(n) {
 }
 time = test(sgln195Test, ITERATIONS);
 console.log("Test Sgln195 time: " + time);
-
 
 function gid96Test(n) {
     let epc;
