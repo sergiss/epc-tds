@@ -15,6 +15,23 @@ function test(t, n) {
 }
 
 let time;
+function cpi96Test(n) {
+    let epc, cpi;
+    for(let i = 0; i < n; ++i) {
+        cpi = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Cpi96().setFilter(3).setPartition(6).setCpi(cpi);
+        epc.setSerial(Math.floor(Math.random() * tds.Cpi96.MAX_SERIAL));
+        epc = new tds.Cpi96(epc.toHexString());
+        if(cpi !== epc.getCpi()) {
+            console.log(epc.toIdURI());
+            throw Error(`Cpi96, expected CPI: ${cpi}, current: ${epc.getCpi()}`);
+        }
+    }
+    //console.log(epc.toHexString())
+}
+time = test(cpi96Test, ITERATIONS);
+console.log("Test Cpi96 time: " + time);
+
 function gsrn96Test(n) {
     let epc, gsrn;
     for(let i = 0; i < n; ++i) {
