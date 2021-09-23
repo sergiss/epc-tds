@@ -1,10 +1,10 @@
 /**
- * 96-bit Serialised Global Trade Item Number (CPI)
+ * 96-bit Component / Part Identifier (CPI)
  * 
- * The Serialised Global Trade Item Number EPC scheme is used to assign a unique identity to an 
- * instance of a trade item, such as a specific instance of a product or SKU.
+ * The Component / Part EPC identifier is designed for use by the technical industries (including the
+ * automotive sector) for the unique identification of parts or components. 
  * 
- * Typical use: Trade item
+ * Typical use: Technical industries (e.g. automotive ) - components and parts
  * 
  * @author Sergio S. 
  *
