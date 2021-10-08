@@ -50,7 +50,9 @@ function computeCheckDigit(barcode) { // https://www.gs1.org/services/how-calcul
     }
     // Subtract the sum from nearest equal or higher multiple of ten
     let result = (even + odd * 3) % 10; 
-    if(result === 0) return 0;
+    if(result !== 0) {
+      result = 10 - result;
+    }  
     return result;
 }
 
