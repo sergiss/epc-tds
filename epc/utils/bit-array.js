@@ -1,5 +1,5 @@
 /*
-* EPC Tag Data Standard - Ex
+* EPC Tag Data Standard
 * 2021 Sergio S.
 */
 
