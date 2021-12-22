@@ -25,13 +25,13 @@ const NUMBER_TABLE = [
 
 function computeCheckDigit(barcode) { // https://www.gs1.org/services/how-calculate-check-digit-manually
 
-    // 																				CHECK DIGIT										
-    // GTIN-8                                          n01 n02 n03 n04 n05 n06 n07 | 	n08 
-    // GTIN-12                         n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 | 	n12 
-    // GTIN-13                     n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 | 	n13 
-    // GTIN-14                 n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 | 	n14 
-    // GSIN        n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 n14 n15 n16 | 	n17
-    // SSCC    n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 n14 n15 n16 n17 | 	n18
+    // CHECK DIGIT										
+    // GTIN-8                                          n01 n02 n03 n04 n05 n06 n07 | n08 
+    // GTIN-12                         n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 | n12 
+    // GTIN-13                     n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 | n13 
+    // GTIN-14                 n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 | n14 
+    // GSIN        n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 n14 n15 n16 | n17
+    // SSCC    n01 n02 n03 n04 n05 n06 n07 n08 n09 n10 n11 n12 n13 n14 n15 n16 n17 | n18
     // ----------------------------------------------------------------------------------------
     // Mult     x3  x1  x3  x1  x3  x1  x3  x1  x3  x1  x3  x1  x3  x1  x3  x1  x3
     
