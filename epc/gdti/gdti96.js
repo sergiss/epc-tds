@@ -28,7 +28,7 @@ class Gdti96 extends Epc {
 	static MAX_SERIAL       = Utils.getMaxValue(Gdti96.SERIAL_BITS); // 2199023255551
 	
 	static TAG_URI_TEMPLATE = (filter, company, document, serial) => {return `urn:epc:tag:gdti-96:${filter}.${company}.${document}.${serial}`}; // F.C.D.S (Filter, Company, Document, Serial)
-	static PID_URI_TEMPLATE = (company, document, serial) => {return `urn:epc:id:gdti:${company}.${document}.${serial}`}; // C.I.S   (Company, Document, Serial)
+	static PID_URI_TEMPLATE = (company, document, serial) => {return `urn:epc:id:gdti:${company}.${document}.${serial}`}; // C.D.S   (Company, Document, Serial)
 
 	// Partition table columns: Company prefix, Item Reference
 	static PARTITIONS = [ new Partition(Gdti96.PARTITION_END, 40, 12,  1, 0),   // 0 40 12 01 0
@@ -116,11 +116,11 @@ class Gdti96 extends Epc {
 		return this;
 	}
 
-	getItemReference() {
+	getDocumentReference() {
 		return super.getSegment(Gdti96.PARTITIONS[this.getPartition()].b);
 	}
 
-	setItemReference(value) {
+	setDocumentReference(value) {
 		super.setSegment(value, Gdti96.PARTITIONS[this.getPartition()].b);
 		return this;
 	}
