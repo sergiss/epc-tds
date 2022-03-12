@@ -6,7 +6,7 @@
  * 
  * Typical use: Returnable/reusable asset
  * 
- * @author Sergio S. 
+ * @author Sergio S. - https://github.com/sergiss/epc-tds
  *
  */
 

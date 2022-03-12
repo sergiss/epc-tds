@@ -6,7 +6,7 @@
  * 
  * Typical use: Hospital admission or club membership
  * 
- * @author Sergio S. 
+ * @author Sergio S. - https://github.com/sergiss/epc-tds
  *
  */
 

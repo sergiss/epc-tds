@@ -1,6 +1,6 @@
 /*
 * EPC Tag Data Standard
-* 2021 Sergio S.
+* 2021 Sergio S. - https://github.com/sergiss/epc-tds
 */
 
 const HEX_TABLE = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];

@@ -1,6 +1,6 @@
 /*
 * EPC Tag Data Standard
-* 2021 Sergio S.
+* 2021 Sergio S. - https://github.com/sergiss/epc-tds
 */
 
 class Type {

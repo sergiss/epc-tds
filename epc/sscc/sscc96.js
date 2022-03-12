@@ -6,7 +6,7 @@
  * 
  * Typical use: Pallet load or other logistics unit load
  * 
- * @author Sergio S.
+ * @author Sergio S. - https://github.com/sergiss/epc-tds
  * 
  */
 

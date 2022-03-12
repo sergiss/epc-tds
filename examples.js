@@ -1,7 +1,7 @@
 /*
 * EPC Tag Data Standard
 * Decode/Encode Examples
-* 2021 Sergio S.
+* 2021 Sergio S. - https://github.com/sergiss/epc-tds
 */
 
 "use strict";

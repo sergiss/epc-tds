@@ -6,7 +6,7 @@
  * 
  * Typical use: Unspecified
  * 
- * @author Sergio S. 
+ * @author Sergio S. - https://github.com/sergiss/epc-tds
  *
  */
 

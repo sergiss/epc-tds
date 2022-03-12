@@ -6,7 +6,7 @@
  * 
  * Typical use: Fixed asset
  * 
- * @author Sergio S. 
+ * @author Sergio S. - https://github.com/sergiss/epc-tds
  *
  */
 
