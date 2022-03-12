@@ -15,6 +15,21 @@ function test(t, n) {
 }
 
 let time;
+function sgcn96Test(n) {
+    let epc, sgcn;
+    for(let i = 0; i < n; ++i) {
+        sgcn = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Sgcn96().setFilter(3).setPartition(6).setSgcn(sgcn);
+        epc = new tds.Sgcn96(epc.toHexString());
+        if(sgcn !== epc.getSgcn()) {
+            console.log(epc.toIdURI());
+            throw Error(`Sgcn96, expected GDTI: ${sgcn}, current: ${epc.getSgcn()}`);
+        }
+    }
+}
+time = test(sgcn96Test, ITERATIONS);
+console.log("Test Sgcn96 time: " + time);
+
 function gdti96Test(n) {
     let epc, gdti;
     for(let i = 0; i < n; ++i) {
