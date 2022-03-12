@@ -18,6 +18,7 @@ const { Giai96 } = require("./epc/giai/giai96");
 const { Giai202 } = require("./epc/giai/giai202");
 const { Gsrn96 } = require("./epc/gsrn/gsrn96");
 const { Cpi96 } = require("./epc/cpi/cpi96");
+const { Gdti96 } = require("./epc/gdti/gdti96");
 
 function valueOf(hexEpc) {
   let header = Utils.hexToByte(hexEpc, 0); // first byte of EPC
@@ -46,10 +47,12 @@ function valueOf(hexEpc) {
       return new Gsrn96(hexEpc);
     case Cpi96.EPC_HEADER:
       return new Cpi96(hexEpc);
+    case Gdti96.EPC_HEADER:
+      return new Gdti96(hexEpc);
     default:
       throw new Error(`Unsupported EPC: '${hexEpc}'`);
   }
 }
 
-exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Utils };
+exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Gdti96, Utils };
 exports.valueOf = valueOf;

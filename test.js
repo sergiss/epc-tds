@@ -15,6 +15,21 @@ function test(t, n) {
 }
 
 let time;
+function gdti96Test(n) {
+    let epc, gdti;
+    for(let i = 0; i < n; ++i) {
+        gdti = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Gdti96().setFilter(3).setPartition(6).setGdti(gdti);
+        epc = new tds.Gdti96(epc.toHexString());
+        if(gdti !== epc.getGdti()) {
+            console.log(epc.toIdURI());
+            throw Error(`Gdti96, expected GDTI: ${gdti}, current: ${epc.getGdti()}`);
+        }
+    }
+}
+time = test(gdti96Test, ITERATIONS);
+console.log("Test Gdti96 time: " + time);
+
 function cpi96Test(n) {
     let epc, cpi;
     for(let i = 0; i < n; ++i) {

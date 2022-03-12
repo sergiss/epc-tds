@@ -17,6 +17,8 @@ class Type {
   static GIAI220  = "GIAI-220";
   static GSRN96   = "GSRN-96";
   static GPI96    = "GPI-96";
+  static GDTI96   = "GDTI-96";
 
 }
+
 module.exports = { Type };
