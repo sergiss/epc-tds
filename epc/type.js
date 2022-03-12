@@ -19,6 +19,7 @@ class Type {
   static GPI96    = "GPI-96";
   static GDTI96   = "GDTI-96";
   static GDTI174  = "GDTI-174";
+  static SGCN96   = "SGCN-96";
 
 }
 
