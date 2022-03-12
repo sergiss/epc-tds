@@ -25,7 +25,8 @@ class Gdti174 extends Epc {
 	static SERIAL_OFFSET    = 55;
 	static SERIAL_END       = Gdti174.TOTAL_BITS;
 	static SERIAL_BITS      = 119;
-	static MAX_SERIAL       = Utils.getMaxValue(Gdti174.SERIAL_BITS);
+	static MAX_SERIAL_LEN   = 17;
+	static CHAR_BITS = (Gdti174.SERIAL_END - Gdti174.SERIAL_OFFSET) / Gdti174.MAX_SERIAL_LEN; // 7
 	
 	static TAG_URI_TEMPLATE = (filter, company, document, serial) => {return `urn:epc:tag:gdti-174:${filter}.${company}.${document}.${serial}`}; // F.C.D.S (Filter, Company, Document, Serial)
 	static PID_URI_TEMPLATE = (company, document, serial) => {return `urn:epc:id:gdti:${company}.${document}.${serial}`}; // C.D.S   (Company, Document, Serial)
@@ -126,12 +127,12 @@ class Gdti174 extends Epc {
 	}
 
 	getSerial() {
-		return super.get(Gdti174.SERIAL_OFFSET, Gdti174.SERIAL_END);
+		return super.getString(Gdti174.SERIAL_OFFSET, Gdti174.SERIAL_END, Gdti174.CHAR_BITS);
 	}
 
 	setSerial(value) {
-		if(value > Gdti174.MAX_SERIAL) throw new Error(`Value '${value}' out of range (min: 0, max: ${Gdti174.MAX_SERIAL})`);
-		super.set(value, Gdti174.SERIAL_OFFSET, Gdti174.SERIAL_END);
+		if(!value || value.length > Gdti174.MAX_SERIAL_LEN) throw new Error(`Value '${value}' length out of range (max length: ${Gdti174.MAX_SERIAL_LEN})`);
+		super.setString(value, Gdti174.SERIAL_OFFSET, Gdti174.SERIAL_END, Gdti174.CHAR_BITS);
 		return this;
 	}
 

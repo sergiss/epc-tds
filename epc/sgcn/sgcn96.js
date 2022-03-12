@@ -24,7 +24,7 @@ class Sgcn96 extends Epc {
 	static SERIAL_OFFSET    = 55;
 	static SERIAL_END       = Sgcn96.TOTAL_BITS;
 	static SERIAL_BITS      = 41;
-	static MAX_SERIAL       = Utils.getMaxValue(Sgcn96.SERIAL_BITS); // 2199023255551
+	static MAX_SERIAL       = Utils.getMaxValue(Sgcn96.SERIAL_BITS);
 	
 	static TAG_URI_TEMPLATE = (filter, company, coupon, serial) => {return `urn:epc:tag:sgcn-96:${filter}.${company}.${coupon}.${serial}`}; // F.C.C.S (Filter, Company, Coupon, Serial)
 	static PID_URI_TEMPLATE = (company, coupon, serial) => {return `urn:epc:id:sgcn:${company}.${coupon}.${serial}`}; // C.C.S   (Company, Coupon, Serial)
@@ -102,7 +102,7 @@ class Sgcn96 extends Epc {
 		super.setSegment(sgcn.substring(0, partition.a.digits), partition.a);
         let tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(sgcn.substring(partition.a.digits, tmp), partition.b);
-        this.setSerial(Number(sgcn.substring(tmp + 1, sgcn.length)));        
+        this.setSerial(sgcn.substring(tmp + 1, sgcn.length));        
 		return this;
 	}
 
@@ -125,12 +125,12 @@ class Sgcn96 extends Epc {
 	}
 
 	getSerial() {
-		return super.get(Sgcn96.SERIAL_OFFSET, Sgcn96.SERIAL_END);
+		return super.get(Sgcn96.SERIAL_OFFSET, Sgcn96.SERIAL_END).toString().substring(1);
 	}
 
 	setSerial(value) {
 		if(value > Sgcn96.MAX_SERIAL) throw new Error(`Value '${value}' out of range (min: 0, max: ${Sgcn96.MAX_SERIAL})`);
-		super.set(value, Sgcn96.SERIAL_OFFSET, Sgcn96.SERIAL_END);
+		super.set(Number('1' + value), Sgcn96.SERIAL_OFFSET, Sgcn96.SERIAL_END);
 		return this;
 	}
 
