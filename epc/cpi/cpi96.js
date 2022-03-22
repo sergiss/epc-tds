@@ -67,7 +67,7 @@ class Cpi96 extends Epc {
 	}
 	
 	toBarcode() {
-		return this.getGtin();
+		return this.getCpi();
 	}
 
 	getTotalBits() {
