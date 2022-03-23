@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>epc-tds | https://github.com/sergiss/epc-tds</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            font-family: monospace, Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            overflow: auto;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        .out {
+            min-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            min-width: 700px;
+            height: 80px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #cdddf1;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;            
+        }
+
+        .epc-container {
+            width: 100%;
+            display: flex;
+            gap: 5px;
+        }
+
+        #epc-input {
+            flex: 1;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #tag-uri {
+            font-weight: normal;
+            border-bottom: 1px solid gray;
+        }
+
+        .error {
+            color: red;
+        }
+
+    </style>
+    <script src="../epc-tds.min.js"></script>
+
+</head>
+<body>
+
+    <div class="out">
+        <h1>EPC TDS Bundle Example</h1>
+        <div class="container">
+            <div class="epc-container">
+                <label>EPC</label>
+                <input type="text" id="epc-input">
+                <input id="rnd" type="button" value="Random">
+            </div>
+            <label id="tag-uri"></label>
+        </div>
+        <a href="https://github.com/sergiss/epc-tds" target="_blank"><i class="fa">&#xf09b;</i> Source Code </a>
+    </div>
+
+    <script>
+
+        // instantiate epc-tds
+        const tds = require('epc-tds');
+
+        const input = document.querySelector('#epc-input');
+        const label = document.querySelector('#tag-uri');
+
+        // update label (tag-uri)
+        const update = (hex)=> {
+            try {
+                input.value = hex;
+                let epc = tds.valueOf(hex);
+                let result = epc.toTagURI();
+                label.innerText = result;
+                label.classList.remove("error");
+            } catch(e) {
+                label.innerText = "Unsupported EPC";
+                label.classList.add("error");
+            }
+        }
+
+        // handle epc-input
+        input.addEventListener('input', (e)=> {
+            update(e.target.value); // update
+        });
+
+        // random EPC (Sgtin-96)
+        const rndEpc = ()=> {
+            let sgtin = new tds.Sgtin96();
+            sgtin.setGtin(tds.Utils.randomEan(13));
+            sgtin.setSerial(Math.floor(Math.random() * tds.Sgtin96.MAX_SERIAL));
+            return sgtin.toHexString();
+        }
+
+        const rnd = document.querySelector('#rnd');
+        rnd.addEventListener("click", (e)=> {
+            update(rndEpc());
+        });
+
+        update(rndEpc());
+
+    </script>
+</body>
+</html>
