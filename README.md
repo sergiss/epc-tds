@@ -74,6 +74,24 @@ console.log("Tag URI: " + epc2.toTagURI());
 
 Note: This is a summary of how the library works, check the source code for more features.
 
+### Frontend version
+
+```
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="/bundle/epc-tds.min.js"></script>
+    </head>
+    <body>
+        <script>
+            const tds = require('epc-tds')
+            let epc = tds.valueOf("3074257BF7194E4000001A85");
+            alert(epc.toTagURI());
+        </script>  
+    </body>
+</html>
+```
+
 https://www.sergiosoriano.com
 
 [npm-url]: https://npmjs.org/package/epc-tds
