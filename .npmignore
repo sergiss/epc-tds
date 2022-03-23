@@ -1,3 +1,4 @@
 doc
 *.pdf
 .DS_Store
+bundle
