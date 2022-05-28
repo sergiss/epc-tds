@@ -1,6 +1,6 @@
 {
   "name": "epc-tds",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "index.js",
   "directories": {
     "doc": "doc"
@@ -20,7 +20,7 @@
   ],
   "author": "Sergio Soriano",
   "license": "MIT",
-  "description": "EPC Tag Data Standard encoding and decoding library, written in javascript for Node.js",
+  "description": "EPC Tag Data Standard encoding and decoding library, written in javascript",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sergiss/epc-tds.git"

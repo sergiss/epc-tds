@@ -1,30 +1,31 @@
 # epc-tds
-EPC Tag Data Standard encoding and decoding library, written in javascript for Node.js
+
+EPC Tag Data Standard encoding and decoding library, written in javascript (Node.JS and Frontend)
 
 Simple, very fast and easy to use ;)
 
-[![NPM Version][npm-image]][npm-url]
+[![NPM Version][npm-version-image]][npm-url]
 
 ## Usage
 
-### Automatic decoding of any standard (SGTIN-96, SGTIN-198, SSCC-96, SGLN-96...)
+### Automatic decoding of any standard (SGTIN-96, SGTIN-198, SSCC-96, SGLN-96, GID, GRAI, GSRN, ...)
 ```js
 
-const tds = require('epc-tds');
+const epcTds = require('epc-tds');
 
-var epc = tds.valueOf("3074257BF7194E4000001A85"); // SGTIN-96
+var epc = epcTds.valueOf("3074257BF7194E4000001A85"); // SGTIN-96
 console.log("Id URI : " + epc.toIdURI());
 console.log("Tag URI: " + epc.toTagURI());
 console.log("Barcode: " + epc.toBarcode()); // sgtin
 console.log("Serial : " + epc.getSerial());
 
-epc = tds.valueOf("3178E61C883950F59A000000"); // SSCC-96
+epc = epcTds.valueOf("3178E61C883950F59A000000"); // SSCC-96
 console.log("Id URI : " + epc.toIdURI());
 console.log("Tag URI: " + epc.toTagURI());
 console.log("Barcode: " + epc.toBarcode()); // sscc
 console.log("Serial : " + epc.getSerialReference());
 
-epc = tds.valueOf("377A6BB0C1BDA6D9B664D1AB266D1AB266D1AB266D00"); // GRAI-170
+epc = epcTds.valueOf("377A6BB0C1BDA6D9B664D1AB266D1AB266D1AB266D00"); // GRAI-170
 console.log("Id URI : " + epc.toIdURI());
 console.log("Tag URI: " + epc.toTagURI());
 console.log("Barcode: " + epc.toBarcode()); // grai
@@ -34,6 +35,9 @@ console.log("Serial : " + epc.getSerial());
 
 ### Decode Hex EPC
 ```js
+
+const epcTds = require('epc-tds');
+
 // Decode from Hex EPC
 let epc = tds.valueOf("3074257BF7194E4000001A85"); // sgtin-96
 
@@ -51,8 +55,11 @@ console.log("Tag URI: "       + epc.toTagURI());
 
 ### Encode Hex EPC
 ```js
+
+const epcTds = require('epc-tds');
+
 // e.g. 1: EAN + Serial
-let epc1 = new tds.Sgtin96().setFilter(3)
+let epc1 = new epcTds.Sgtin96().setFilter(3)
                             .setPartition(5)
                             .setGtin("00001234523457")
                             .setSerial(1823342345);
@@ -61,7 +68,7 @@ console.log("HexEPC: "  + epc1.toHexString()); // HEX EPC
 console.log("Tag URI: " + epc1.toTagURI());
        
 // e.g. 2: (companyPrefix + ItemReference) + Serial
-let epc2 = new tds.Sgtin96().setFilter(3)
+let epc2 = new epcTds.Sgtin96().setFilter(3)
                             .setPartition(5)
                             .setCompanyPrefix(78952)
                             .setItemReference(44235)
@@ -72,7 +79,11 @@ console.log("Tag URI: " + epc2.toTagURI());
 
 ```
 
-Note: This is a summary of how the library works, check the source code for more features.
+<Note>
+
+**Note:** This is a summary of how the library works, check the source code for more features.
+
+</Note>
 
 ### Frontend version
 
@@ -92,7 +103,7 @@ Note: This is a summary of how the library works, check the source code for more
 </html>
 ```
 
-https://www.sergiosoriano.com
+[www.sergiosoriano.com](https://www.sergiosoriano.com)
 
 [npm-url]: https://npmjs.org/package/epc-tds
-[npm-image]: https://img.shields.io/npm/v/epc-tds.svg
+[npm-version-image]: https://img.shields.io/npm/v/epc-tds
