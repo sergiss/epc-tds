@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,8 @@
             font-size: 1.2rem;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
         }
 
@@ -36,7 +38,6 @@
 
         .container {
             min-width: 700px;
-            height: 80px;
             margin: 20px;
             padding: 20px;
             background-color: #cdddf1;
@@ -45,7 +46,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 10px;            
+            gap: 10px;
         }
 
         .epc-container {
@@ -64,17 +65,28 @@
 
         #tag-uri {
             font-weight: normal;
-            border-bottom: 1px solid gray;
+            max-height: 300px;
+            overflow: hidden;
+            overflow-y: scroll;
+            list-style-type: none;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        li {
+            margin-bottom: 5px;
         }
 
         .error {
             color: red;
         }
 
+  
     </style>
     <script src="../epc-tds.min.js"></script>
 
 </head>
+
 <body>
 
     <div class="out">
@@ -85,7 +97,7 @@
                 <input type="text" id="epc-input">
                 <input id="rnd" type="button" value="Random">
             </div>
-            <label id="tag-uri"></label>
+            <ul id="tag-uri"></ul>
         </div>
         <a href="https://github.com/sergiss/epc-tds" target="_blank"><i class="fa">&#xf09b;</i> Source Code </a>
     </div>
@@ -96,42 +108,54 @@
         const tds = require('epc-tds');
 
         const input = document.querySelector('#epc-input');
-        const label = document.querySelector('#tag-uri');
+        const div = document.querySelector('#tag-uri');
 
         // update label (tag-uri)
-        const update = (hex)=> {
-            try {
-                input.value = hex;
-                let epc = tds.valueOf(hex);
-                let result = epc.toTagURI();
-                label.innerText = result;
-                label.classList.remove("error");
-            } catch(e) {
-                label.innerText = "Unsupported EPC";
-                label.classList.add("error");
+        const update = (hex) => {
+            div.innerHTML = '';
+            input.value = hex;
+            const values = hex.split(/[, ]+/);
+            for (value of values) {
+                let tmp = value.trim();
+                if (tmp) {
+                    const label = document.createElement('li');
+                    div.appendChild(label);
+                    try {
+                        let epc = tds.valueOf(tmp);
+                        let result = epc.toTagURI();
+                        label.innerText = result;
+                    } catch (e) {
+                        label.innerText = "Unsupported EPC: " + tmp;
+                        label.classList.add("error");
+                    }
+                }
             }
         }
 
         // handle epc-input
-        input.addEventListener('input', (e)=> {
+        input.addEventListener('input', (e) => {
             update(e.target.value); // update
         });
 
         // random EPC (Sgtin-96)
-        const rndEpc = ()=> {
+        const rndEpc = () => {
             let sgtin = new tds.Sgtin96();
             sgtin.setGtin(tds.Utils.randomEan(13));
             sgtin.setSerial(Math.floor(Math.random() * tds.Sgtin96.MAX_SERIAL));
             return sgtin.toHexString();
         }
 
-        const rnd = document.querySelector('#rnd');
-        rnd.addEventListener("click", (e)=> {
-            update(rndEpc());
-        });
+        const handleRandom = ()=> {
+            const array = new Array(1).fill().map(()=> rndEpc());
+            update(array.join());
+        }
 
-        update(rndEpc());
+        const rnd = document.querySelector('#rnd');
+        rnd.addEventListener("click", handleRandom);
+
+        handleRandom();
 
     </script>
 </body>
+
 </html>
