@@ -108,25 +108,25 @@
         const tds = require('epc-tds');
 
         const input = document.querySelector('#epc-input');
-        const div = document.querySelector('#tag-uri');
+        const ul = document.querySelector('#tag-uri');
 
         // update label (tag-uri)
         const update = (hex) => {
-            div.innerHTML = '';
+            ul.innerHTML = '';
             input.value = hex;
             const values = hex.split(/[, ]+/);
             for (value of values) {
                 let tmp = value.trim();
                 if (tmp) {
-                    const label = document.createElement('li');
-                    div.appendChild(label);
+                    const li = document.createElement('li');
+                    ul.appendChild(li);
                     try {
                         let epc = tds.valueOf(tmp);
                         let result = epc.toTagURI();
-                        label.innerText = result;
+                        li.innerText = result;
                     } catch (e) {
-                        label.innerText = "Unsupported EPC: " + tmp;
-                        label.classList.add("error");
+                        li.innerText = "Unsupported EPC: " + tmp;
+                        li.classList.add("error");
                     }
                 }
             }
