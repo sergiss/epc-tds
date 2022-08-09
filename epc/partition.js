@@ -9,7 +9,7 @@ class Partition {
 		
 	 constructor(offset, bits1, digits1, bits2, digits2) {
 		this.a = new Segment(offset, bits1, digits1);
-		this.b = new Segment(this.a.end , bits2, digits2);
+		this.b = new Segment(this.a.end, bits2, digits2);
 	}
 
 }

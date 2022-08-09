@@ -22,6 +22,44 @@ const { Gdti96 } = require("./epc/gdti/gdti96");
 const { Gdti174 } = require("./epc/gdti/gdti174");
 const { Sgcn96 } = require("./epc/sgcn/sgcn96");
 
+function fromTagURI(uri) {
+  const value = uri.split(':');
+  switch (value[3]) {
+    case Sgtin96.TAG_URI:
+      return Sgtin96.fromTagURI(uri);
+    case Sgtin198.TAG_URI:
+      return Sgtin198.fromTagURI(uri);
+    case Grai96.TAG_URI:
+      return Grai96.fromTagURI(uri);
+    case Grai170.TAG_URI:
+      return Grai170.fromTagURI(uri);
+    case Sscc96.TAG_URI:
+      return Sscc96.fromTagURI(uri);
+   /* case Sgln96.TAG_URI:
+      return Sgln96.fromTagURI(uri);
+    case Sgln195.TAG_URI:
+      return Sgln195.fromTagURI(uri);
+    case Gid96.TAG_URI:
+      return Gid96.fromTagURI(uri);
+    case Giai96.TAG_URI:
+      return Giai96.fromTagURI(uri);
+    case Giai202.TAG_URI:
+      return Giai202.fromTagURI(uri);
+    case Gsrn96.TAG_URI:
+      return Gsrn96.fromTagURI(uri);
+    case Cpi96.TAG_URI:
+      return Cpi96.fromTagURI(uri);
+    case Gdti96.TAG_URI:
+      return Gdti96.fromTagURI(uri);
+    case Gdti174.TAG_URI:
+      return Gdti174.fromTagURI(uri);
+    case Sgcn96.TAG_URI:
+      return Sgcn96.fromTagURI(uri);*/
+    default:
+      throw new Error(`Unsupported Tag URI: '${uri}'`);
+  }
+}
+
 function valueOf(hexEpc) {
   let header = Utils.hexToByte(hexEpc, 0); // first byte of EPC
   switch (header) {
@@ -62,3 +100,4 @@ function valueOf(hexEpc) {
 
 exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Gdti96, Gdti174, Sgcn96, Utils };
 exports.valueOf = valueOf;
+exports.fromTagURI = fromTagURI;

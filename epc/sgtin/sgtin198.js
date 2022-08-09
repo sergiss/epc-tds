@@ -26,8 +26,10 @@ class Sgtin198 extends Epc {
 	static SERIAL_END       = Sgtin198.TOTAL_BITS;
 	static MAX_SERIAL_LEN   = 20;
 	static CHAR_BITS = (Sgtin198.SERIAL_END - Sgtin198.SERIAL_OFFSET) / Sgtin198.MAX_SERIAL_LEN; // 7
+
+	static TAG_URI = 'sgtin-198';
 	
-	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:sgtin-198:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
 	static PID_URI_TEMPLATE = (company, item, serial) => {return `urn:epc:id:sgtin:${company}.${item}.${serial}`}; // C.I.S   (Company, Item, Serial)
 
 	constructor(hexEpc) {	
@@ -45,6 +47,25 @@ class Sgtin198 extends Epc {
 
 	getType() {
 		return Type.SGTIN198;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sgtin198();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setItemReference(parseInt(data[2]));
+				result.setSerial(data[3]);
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Item, Serial)

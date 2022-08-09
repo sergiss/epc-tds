@@ -51,6 +51,12 @@ console.log("GTIN(EAN): "     + epc.getGtin()); // ean
 console.log("HexEPC: "        + epc.toHexString()); // HEX EPC
 console.log("Tag URI: "       + epc.toTagURI());
 
+
+// Decode from Hex Tag URI
+epc = epcTds.fromTagURI('urn:epc:tag:sgtin-96:3.0614141.812345.6789');
+console.log("HexEPC: "  + epc.toHexString()); // HEX EPC
+console.log("Tag URI: " + epc.toTagURI());
+
 ```
 
 ### Encode Hex EPC
@@ -98,7 +104,7 @@ console.log("Tag URI: " + epc2.toTagURI());
             const tds = require('epc-tds')
             let epc = tds.valueOf("3074257BF7194E4000001A85");
             alert(epc.toTagURI());
-        </script>  
+        </script> 
     </body>
 </html>
 ```

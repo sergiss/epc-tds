@@ -111,7 +111,7 @@ time = test(giai202Test, ITERATIONS);
 console.log("Test Giai202 time: " + time);
 
 function grai170Test(n) {
-    let epc, grai;
+    let epc, grai, tmp;
     for(let i = 0; i < n; ++i) {
         grai = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Grai170().setFilter(3).setPartition(6).setGrai(grai);
@@ -120,6 +120,11 @@ function grai170Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Grai170, expected GRAI: ${grai}, current: ${epc.getGrai()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Grai170, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }  
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -128,7 +133,7 @@ time = test(grai170Test, ITERATIONS);
 console.log("Test Grai170 time: " + time);
 
 function grai96Test(n) {
-    let epc, grai;
+    let epc, grai, tmp;
     for(let i = 0; i < n; ++i) {
         grai = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Grai96().setFilter(3).setPartition(6).setGrai(grai);
@@ -137,6 +142,11 @@ function grai96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Grai96, expected GRAI: ${grai}, current: ${epc.getGrai()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Grai96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }  
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -145,7 +155,7 @@ time = test(grai96Test, ITERATIONS);
 console.log("Test Grai96 time: " + time);
 
 function sscc96Test(n) {
-    let epc, ean;
+    let epc, ean, tmp;
     for(let i = 0; i < n; ++i) {
         ean = tds.Utils.randomEan(18);
         epc = new tds.Sscc96().setFilter(3).setPartition(6).setSscc(ean);
@@ -153,6 +163,11 @@ function sscc96Test(n) {
         if(ean !== epc.getSscc()) {
             throw Error(`Sscc96, expected SSCC: ${ean}, current: ${epc.getSscc()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Grai96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -161,14 +176,19 @@ time = test(sscc96Test, ITERATIONS);
 console.log("Test Sscc96 time: " + time);
 
 function sgtin96Test(n) {
-    let epc, gtin;
+    let epc, gtin, tmp;
     for(let i = 0; i < n; ++i) {
         gtin = tds.Utils.randomEan(14);
         epc = new tds.Sgtin96().setFilter(3).setPartition(6).setGtin(gtin).setSerial(Math.floor(Math.random() * tds.Sgtin96.MAX_SERIAL));
         epc = new tds.Sgtin96(epc.toHexString());
         if(gtin !== epc.getGtin()) {
             throw Error(`Sgtin96, expected GTIN: ${gtin}, current: ${epc.getGtin()}`);
-        }       
+        }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Sgtin96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -177,14 +197,19 @@ time = test(sgtin96Test, ITERATIONS);
 console.log("Test Sgtin96 time: " + time);
 
 function sgtin198Test(n) {
-    let epc, gtin;
+    let epc, gtin, tmp;
     for(let i = 0; i < n; ++i) {
         gtin = tds.Utils.randomEan(14);
         epc = new tds.Sgtin198().setFilter(3).setPartition(6).setGtin(gtin).setSerial(tds.Utils.randomHex(tds.Sgtin198.MAX_SERIAL_LEN));
         epc = new tds.Sgtin198(epc.toHexString());
         if(gtin !== epc.getGtin()) {
             throw Error(`Sgtin198, expected GTIN: ${gtin}, current: ${epc.getGtin()}`);
-        }       
+        }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Sgtin198, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }    
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());

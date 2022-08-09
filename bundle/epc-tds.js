@@ -915,8 +915,10 @@ class Grai170 extends Epc {
 	static SERIAL_BITS      = 112;
     static MAX_SERIAL_LEN   = 16;
 	static CHAR_BITS = (Grai170.SERIAL_END - Grai170.SERIAL_OFFSET) / Grai170.MAX_SERIAL_LEN; // 7
+
+	static TAG_URI = 'grai-170';
 	
-	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:grai-170:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
 	static PID_URI_TEMPLATE = (company, asset, serial) => {return `urn:epc:id:grai:${company}.${asset}.${serial}`}; // C.A.S   (Company, AssetType, Serial)
 
 	constructor(hexEpc) {	
@@ -934,6 +936,25 @@ class Grai170 extends Epc {
 
 	getType() {
 		return Type.GRAI170;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Grai170();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setAssetType(parseInt(data[2]));
+				result.setSerial(data[3]);
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Asset Type, Serial)
@@ -1052,8 +1073,10 @@ class Grai96 extends Epc {
 	static SERIAL_END       = Grai96.TOTAL_BITS;
 	static SERIAL_BITS      = 38;
 	static MAX_SERIAL       = Utils.getMaxValue(Grai96.SERIAL_BITS); // 274877906943
+
+	static TAG_URI = 'grai-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:grai-96:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
 	static PID_URI_TEMPLATE = (company, asset, serial) => {return `urn:epc:id:grai:${company}.${asset}.${serial}`}; // C.A.S   (Company, AssetType, Serial)
 
 	// Partition table columns: Company prefix, Asset Type
@@ -1080,6 +1103,25 @@ class Grai96 extends Epc {
 
 	getType() {
 		return Type.GRAI96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Grai96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setAssetType(parseInt(data[2]));
+				result.setSerial(parseInt(data[3]));
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Asset Type, Serial)
@@ -1304,7 +1346,7 @@ class Partition {
 		
 	 constructor(offset, bits1, digits1, bits2, digits2) {
 		this.a = new Segment(offset, bits1, digits1);
-		this.b = new Segment(this.a.end , bits2, digits2);
+		this.b = new Segment(this.a.end, bits2, digits2);
 	}
 
 }
@@ -1769,8 +1811,10 @@ class Sgtin198 extends Epc {
 	static SERIAL_END       = Sgtin198.TOTAL_BITS;
 	static MAX_SERIAL_LEN   = 20;
 	static CHAR_BITS = (Sgtin198.SERIAL_END - Sgtin198.SERIAL_OFFSET) / Sgtin198.MAX_SERIAL_LEN; // 7
+
+	static TAG_URI = 'sgtin-198';
 	
-	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:sgtin-198:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
 	static PID_URI_TEMPLATE = (company, item, serial) => {return `urn:epc:id:sgtin:${company}.${item}.${serial}`}; // C.I.S   (Company, Item, Serial)
 
 	constructor(hexEpc) {	
@@ -1788,6 +1832,25 @@ class Sgtin198 extends Epc {
 
 	getType() {
 		return Type.SGTIN198;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sgtin198();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setItemReference(parseInt(data[2]));
+				result.setSerial(data[3]);
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Item, Serial)
@@ -1903,8 +1966,10 @@ class Sgtin96 extends Epc {
 	static SERIAL_END       = Sgtin96.TOTAL_BITS;
 	static SERIAL_BITS      = 38;
 	static MAX_SERIAL       = Utils.getMaxValue(Sgtin96.SERIAL_BITS); // 274877906943
+
+	static TAG_URI = 'sgtin-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:sgtin-96:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, item, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${item}.${serial}`}; // F.C.I.S (Filter, Company, Item, Serial)
 	static PID_URI_TEMPLATE = (company, item, serial) => {return `urn:epc:id:sgtin:${company}.${item}.${serial}`}; // C.I.S   (Company, Item, Serial)
 
 	// Partition table columns: Company prefix, Item Reference
@@ -1931,6 +1996,25 @@ class Sgtin96 extends Epc {
 
 	getType() {
 		return Type.SGTIN96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sgtin96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setItemReference(parseInt(data[2]));
+				result.setSerial(parseInt(data[3]));
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Item, Serial)
@@ -2038,7 +2122,9 @@ class Sscc96 extends Epc {
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END    = 14;
 
-	static TAG_URI_TEMPLATE = (filter, company, serial) => {return `urn:epc:tag:sscc-96:${filter}.${company}.${serial}`}; // F.C.S (Filter, Company, Serial)
+	static TAG_URI = 'sscc-96';
+
+	static TAG_URI_TEMPLATE = (filter, company, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${serial}`}; // F.C.S (Filter, Company, Serial)
 	static PID_URI_TEMPLATE = (company, serial) => {return `urn:epc:id:sscc:${company}.${serial}`};                       // C.S   (Company, Serial)
 
 	// Partition table columns: Company prefix, Serial Reference
@@ -2065,6 +2151,24 @@ class Sscc96 extends Epc {
 
 	getType() {
 		return Type.SSCC96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sscc96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setSerialReference(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.S (Filter, Company, Serial)
@@ -2492,6 +2596,44 @@ const { Gdti96 } = require("./epc/gdti/gdti96");
 const { Gdti174 } = require("./epc/gdti/gdti174");
 const { Sgcn96 } = require("./epc/sgcn/sgcn96");
 
+function fromTagURI(uri) {
+  const value = uri.split(':');
+  switch (value[3]) {
+    case Sgtin96.TAG_URI:
+      return Sgtin96.fromTagURI(uri);
+    case Sgtin198.TAG_URI:
+      return Sgtin198.fromTagURI(uri);
+    case Grai96.TAG_URI:
+      return Grai96.fromTagURI(uri);
+    case Grai170.TAG_URI:
+      return Grai170.fromTagURI(uri);
+    case Sscc96.TAG_URI:
+      return Sscc96.fromTagURI(uri);
+   /* case Sgln96.TAG_URI:
+      return Sgln96.fromTagURI(uri);
+    case Sgln195.TAG_URI:
+      return Sgln195.fromTagURI(uri);
+    case Gid96.TAG_URI:
+      return Gid96.fromTagURI(uri);
+    case Giai96.TAG_URI:
+      return Giai96.fromTagURI(uri);
+    case Giai202.TAG_URI:
+      return Giai202.fromTagURI(uri);
+    case Gsrn96.TAG_URI:
+      return Gsrn96.fromTagURI(uri);
+    case Cpi96.TAG_URI:
+      return Cpi96.fromTagURI(uri);
+    case Gdti96.TAG_URI:
+      return Gdti96.fromTagURI(uri);
+    case Gdti174.TAG_URI:
+      return Gdti174.fromTagURI(uri);
+    case Sgcn96.TAG_URI:
+      return Sgcn96.fromTagURI(uri);*/
+    default:
+      throw new Error(`Unsupported Tag URI: '${uri}'`);
+  }
+}
+
 function valueOf(hexEpc) {
   let header = Utils.hexToByte(hexEpc, 0); // first byte of EPC
   switch (header) {
@@ -2532,4 +2674,5 @@ function valueOf(hexEpc) {
 
 exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Gdti96, Gdti174, Sgcn96, Utils };
 exports.valueOf = valueOf;
+exports.fromTagURI = fromTagURI;
 },{"./epc/cpi/cpi96":1,"./epc/gdti/gdti174":3,"./epc/gdti/gdti96":4,"./epc/giai/giai202":5,"./epc/giai/giai96":6,"./epc/gid/gid96":7,"./epc/grai/grai170":8,"./epc/grai/grai96":9,"./epc/gsrn/gsrn96":10,"./epc/sgcn/sgcn96":13,"./epc/sgln/sgln195":14,"./epc/sgln/sgln96":15,"./epc/sgtin/sgtin198":16,"./epc/sgtin/sgtin96":17,"./epc/sscc/sscc96":18,"./epc/utils/utils":21}]},{},[]);

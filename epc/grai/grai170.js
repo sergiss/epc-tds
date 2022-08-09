@@ -27,8 +27,10 @@ class Grai170 extends Epc {
 	static SERIAL_BITS      = 112;
     static MAX_SERIAL_LEN   = 16;
 	static CHAR_BITS = (Grai170.SERIAL_END - Grai170.SERIAL_OFFSET) / Grai170.MAX_SERIAL_LEN; // 7
+
+	static TAG_URI = 'grai-170';
 	
-	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:grai-170:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, asset, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${asset}.${serial}`}; // F.C.A.S (Filter, Company, AssetType, Serial)
 	static PID_URI_TEMPLATE = (company, asset, serial) => {return `urn:epc:id:grai:${company}.${asset}.${serial}`}; // C.A.S   (Company, AssetType, Serial)
 
 	constructor(hexEpc) {	
@@ -46,6 +48,25 @@ class Grai170 extends Epc {
 
 	getType() {
 		return Type.GRAI170;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Grai170();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setAssetType(parseInt(data[2]));
+				result.setSerial(data[3]);
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.I.S (Filter, Company, Asset Type, Serial)

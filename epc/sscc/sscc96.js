@@ -23,7 +23,9 @@ class Sscc96 extends Epc {
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END    = 14;
 
-	static TAG_URI_TEMPLATE = (filter, company, serial) => {return `urn:epc:tag:sscc-96:${filter}.${company}.${serial}`}; // F.C.S (Filter, Company, Serial)
+	static TAG_URI = 'sscc-96';
+
+	static TAG_URI_TEMPLATE = (filter, company, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${serial}`}; // F.C.S (Filter, Company, Serial)
 	static PID_URI_TEMPLATE = (company, serial) => {return `urn:epc:id:sscc:${company}.${serial}`};                       // C.S   (Company, Serial)
 
 	// Partition table columns: Company prefix, Serial Reference
@@ -50,6 +52,24 @@ class Sscc96 extends Epc {
 
 	getType() {
 		return Type.SSCC96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sscc96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setSerialReference(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.S (Filter, Company, Serial)

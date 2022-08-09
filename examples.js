@@ -61,3 +61,10 @@ console.log("** SGTIN-96 **")
 console.log("HexEPC: "  + sgtin.toHexString()); // HEX EPC
 console.log("Tag URI: " + sgtin.toTagURI());
 console.log();
+
+// e.g. 3: Tag URI
+sgtin = tds.fromTagURI('urn:epc:tag:sgtin-96:3.0614141.812345.6789');
+console.log("** SGTIN-96 **")
+console.log("HexEPC: "  + sgtin.toHexString()); // HEX EPC
+console.log("Tag URI: " + sgtin.toTagURI());
+console.log();
