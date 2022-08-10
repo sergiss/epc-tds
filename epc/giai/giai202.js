@@ -15,25 +15,27 @@
  const { Type } = require('../type');
  const { Partition } = require('../partition');
  
-class Giai202 extends Epc {
+class Giai202 extends Epc { // FIXME: incorrect asset reference
 
-	static EPC_HEADER = 0x34;
+	static EPC_HEADER = 0x38;
 
 	static TOTAL_BITS = 202;
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END    = 14;
+
+	static TAG_URI = 'giai-202';
 	
-	static TAG_URI_TEMPLATE = (filter, company, asset) => {return `urn:epc:tag:giai-202:${filter}.${company}.${asset}`}; // F.C.A (Filter, Company, Asset)
+	static TAG_URI_TEMPLATE = (filter, company, asset) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${asset}`}; // F.C.A (Filter, Company, Asset)
 	static PID_URI_TEMPLATE = (company, asset) => {return `urn:epc:id:giai:${company}.${asset}`}; // C.A (Company, Asset)
 
 	// Partition table columns: Company prefix, Asset Type
-	static PARTITIONS = [ new Partition(Giai202.PARTITION_END, 40, 12, 148, 13),   // 0 40 12 148 13
-						  new Partition(Giai202.PARTITION_END, 37, 11, 151, 14),   // 1 37 11 151 14
-						  new Partition(Giai202.PARTITION_END, 34, 10, 154, 15),   // 2 34 10 154 15 
-						  new Partition(Giai202.PARTITION_END, 30,  9, 158, 16),   // 3 30 09 158 16 
-						  new Partition(Giai202.PARTITION_END, 27,  8, 161, 17),   // 4 27 08 161 17 
-						  new Partition(Giai202.PARTITION_END, 24,  7, 164, 18),   // 5 24 07 164 18 
-						  new Partition(Giai202.PARTITION_END, 20,  6, 168, 19) ]; // 6 20 06 168 19
+	static PARTITIONS = [ new Partition(Giai202.PARTITION_END, 40, 12, 148, 18),   // 0 40 12 148 18
+						  new Partition(Giai202.PARTITION_END, 37, 11, 151, 19),   // 1 37 11 151 19
+						  new Partition(Giai202.PARTITION_END, 34, 10, 154, 20),   // 2 34 10 154 20 
+						  new Partition(Giai202.PARTITION_END, 30,  9, 158, 21),   // 3 30 09 158 21 
+						  new Partition(Giai202.PARTITION_END, 27,  8, 161, 22),   // 4 27 08 161 22 
+						  new Partition(Giai202.PARTITION_END, 24,  7, 164, 23),   // 5 24 07 164 23 
+						  new Partition(Giai202.PARTITION_END, 20,  6, 168, 24) ]; // 6 20 06 168 24
 
 	constructor(hexEpc) {	
 		super(Giai202.TOTAL_BITS);
@@ -52,14 +54,32 @@ class Giai202 extends Epc {
 		return Type.GIAI202;
 	}
 
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Giai202();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setAssetReference(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
+	}
+
 	toTagURI() { // F.C.A (Filter, Company, Asset)
 		let partition = Giai202.PARTITIONS[this.getPartition()];
-		return Giai202.TAG_URI_TEMPLATE( this.getFilter(), this.getSegment(partition.a), this.getSegment(partition.b));
+		return Giai202.TAG_URI_TEMPLATE( this.getFilter(), this.getSegmentString(partition.a), this.getSegment(partition.b));
 	}
 
 	toIdURI() { // C.A (Company, Asset)
 		let partition = Giai202.PARTITIONS[this.getPartition()];
-		return Giai202.PID_URI_TEMPLATE( this.getSegment(partition.a), this.getSegment(partition.b));
+		return Giai202.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegment(partition.b));
 	}
 	
 	toBarcode() {
@@ -90,7 +110,7 @@ class Giai202 extends Epc {
 		let partition = Giai202.PARTITIONS[this.getPartition()];
         let companyPrefix = super.getSegmentString(partition.a);
 		let asset = super.getSegment(partition.b);
-		return  String(companyPrefix) + asset;
+		return  companyPrefix + asset;
 	}
 
 	setGiai(giai) {

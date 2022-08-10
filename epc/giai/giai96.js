@@ -22,8 +22,10 @@ class Giai96 extends Epc {
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END    = 14;
+
+	static TAG_URI = 'giai-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, asset) => {return `urn:epc:tag:giai-96:${filter}.${company}.${asset}`}; // F.C.A (Filter, Company, Asset)
+	static TAG_URI_TEMPLATE = (filter, company, asset) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${asset}`}; // F.C.A (Filter, Company, Asset)
 	static PID_URI_TEMPLATE = (company, asset) => {return `urn:epc:id:giai:${company}.${asset}`}; // C.A (Company, Asset)
 
 	// Partition table columns: Company prefix, Asset Type
@@ -50,6 +52,24 @@ class Giai96 extends Epc {
 
 	getType() {
 		return Type.GIAI96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Giai96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setAssetReference(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.A (Filter, Company, Asset)

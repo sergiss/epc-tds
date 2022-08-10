@@ -25,10 +25,12 @@ class Sgln195 extends Epc {
 	static EXTENSION_OFFSET = 55;
 	static EXTENSION_END    = Sgln195.TOTAL_BITS;
 	static EXTENSION_BITS   = 140;
-    static CHAR_BITS = (Sgln195.SERIAL_END - Sgln195.SERIAL_OFFSET) / Sgln195.MAX_SERIAL_LEN; // 7
-    static MAX_SERIAL_LEN   = 16;
+	static MAX_EXTENSION_LEN = 20;
+    static CHAR_BITS = (Sgln195.EXTENSION_END - Sgln195.EXTENSION_OFFSET) / Sgln195.MAX_EXTENSION_LEN;
 
-	static TAG_URI_TEMPLATE = (filter, company, location, extension) => {return `urn:epc:tag:sgln-195:${filter}.${company}.${location}.${extension}`}; // F.C.L.E (Filter, Company, Location, Extension)
+	static TAG_URI = 'sgln-195';
+
+	static TAG_URI_TEMPLATE = (filter, company, location, extension) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${location}.${extension}`}; // F.C.L.E (Filter, Company, Location, Extension)
 	static PID_URI_TEMPLATE = (company, location, extension) => {return `urn:epc:id:sgln:${company}.${location}.${extension}`}; // C.L.E   (Company, Location, Extension)
 
 	constructor(hexEpc) {	
@@ -46,6 +48,25 @@ class Sgln195 extends Epc {
 
 	getType() {
 		return Type.SGLN195;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sgln195();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompany(parseInt(data[1]));
+				result.setLocation(parseInt(data[2]));
+				result.setExtension(data[3]);
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.L.E (Filter, Company, Location, Extension)
@@ -114,7 +135,7 @@ class Sgln195 extends Epc {
 	}
 
     getExtension() {
-		return super.getString(Sgln195.SERIAL_OFFSET, Sgln195.SERIAL_END, Sgln195.CHAR_BITS);
+		return super.getString(Sgln195.EXTENSION_OFFSET, Sgln195.EXTENSION_END, Sgln195.CHAR_BITS);
 	}
 
     /**
@@ -122,8 +143,8 @@ class Sgln195 extends Epc {
 	* @param value
 	*/
 	setExtension(value) {
-		if(!value || value.length > Sgln195.MAX_SERIAL_LEN) throw new Error(`Value '${value}' length out of range (max length: ${Sgln195.MAX_SERIAL_LEN})`);
-		super.setString(value, Sgln195.SERIAL_OFFSET, Sgln195.SERIAL_END, Sgln195.CHAR_BITS);
+		if(!value || value.length > Sgln195.MAX_EXTENSION_LEN) throw new Error(`Value '${value}' length out of range (max length: ${Sgln195.MAX_EXTENSION_LEN})`);
+		super.setString(value, Sgln195.EXTENSION_OFFSET, Sgln195.EXTENSION_END, Sgln195.CHAR_BITS);
         return this;
 	}
 

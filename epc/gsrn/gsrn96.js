@@ -22,8 +22,10 @@ class Gsrn96 extends Epc {
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END    = 14;
+
+	static TAG_URI = 'gsrn-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, service) => {return `urn:epc:tag:gsrn-96:${filter}.${company}.${service}`}; // F.C.S (Filter, Company, Service)
+	static TAG_URI_TEMPLATE = (filter, company, service) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${service}`}; // F.C.S (Filter, Company, Service)
 	static PID_URI_TEMPLATE = (company, asset) => {return `urn:epc:id:gsrn:${company}.${asset}`}; // C.S (Company, Service)
 
 	// Partition table columns: Company prefix, Service Reference
@@ -50,6 +52,24 @@ class Gsrn96 extends Epc {
 
 	getType() {
 		return Type.GSRN96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Gsrn96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setServiceReference(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.S (Filter, Company, Service)

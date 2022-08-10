@@ -72,7 +72,7 @@ class Grai96 extends Epc {
 				return result;
 			}
 		} catch (e) {
-			console.log(e)
+			// console.log(e)
 		}
 		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}

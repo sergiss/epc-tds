@@ -26,8 +26,10 @@ class Sgln96 extends Epc {
 	static EXTENSION_END    = Sgln96.TOTAL_BITS;
 	static EXTENSION_BITS   = 41;
 	static MAX_EXTENSION    = Utils.getMaxValue(Sgln96.EXTENSION_BITS); // 274877906943
+
+	static TAG_URI = 'sgln-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, location, extension) => {return `urn:epc:tag:sgln-96:${filter}.${company}.${location}.${extension}`}; // F.C.L.E (Filter, Company, Location, Extension)
+	static TAG_URI_TEMPLATE = (filter, company, location, extension) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${location}.${extension}`}; // F.C.L.E (Filter, Company, Location, Extension)
 	static PID_URI_TEMPLATE = (company, location, extension) => {return `urn:epc:id:sgln:${company}.${location}.${extension}`}; // C.L.E   (Company, Location, Extension)
 
 	// Partition table columns: Company prefix, Location Reference
@@ -54,6 +56,25 @@ class Sgln96 extends Epc {
 
 	getType() {
 		return Type.SGLN96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Sgln96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompany(parseInt(data[1]));
+				result.setLocation(parseInt(data[2]));
+				result.setExtension(parseInt(data[3]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.L.E (Filter, Company, Location, Extension)

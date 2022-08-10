@@ -26,8 +26,10 @@ class Cpi96 extends Epc {
 	static SERIAL_END       = Cpi96.TOTAL_BITS;
 	static SERIAL_BITS      = 31;
 	static MAX_SERIAL       = Utils.getMaxValue(Cpi96.SERIAL_BITS);
+
+	static TAG_URI = 'cpi-96';
 	
-	static TAG_URI_TEMPLATE = (filter, company, part, serial) => {return `urn:epc:tag:cpi-96:${filter}.${company}.${part}.${serial}`}; // F.C.P.S (Filter, Company, Part, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, part, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${part}.${serial}`}; // F.C.P.S (Filter, Company, Part, Serial)
 	static PID_URI_TEMPLATE = (company, part, serial) => {return `urn:epc:id:cpi:${company}.${part}.${serial}`}; // C.P.S   (Company, Part, Serial)
 
 	// Partition table columns: Company prefix, Item Reference
@@ -54,6 +56,25 @@ class Cpi96 extends Epc {
 
 	getType() {
 		return Type.GPI96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Cpi96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setPartReference(parseInt(data[2]));
+				result.setSerial(parseInt(data[3]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.P.S (Filter, Company, Part, Serial)

@@ -35,7 +35,7 @@ function fromTagURI(uri) {
       return Grai170.fromTagURI(uri);
     case Sscc96.TAG_URI:
       return Sscc96.fromTagURI(uri);
-   /* case Sgln96.TAG_URI:
+    case Sgln96.TAG_URI:
       return Sgln96.fromTagURI(uri);
     case Sgln195.TAG_URI:
       return Sgln195.fromTagURI(uri);
@@ -54,7 +54,7 @@ function fromTagURI(uri) {
     case Gdti174.TAG_URI:
       return Gdti174.fromTagURI(uri);
     case Sgcn96.TAG_URI:
-      return Sgcn96.fromTagURI(uri);*/
+      return Sgcn96.fromTagURI(uri);
     default:
       throw new Error(`Unsupported Tag URI: '${uri}'`);
   }

@@ -26,8 +26,10 @@ class Gdti96 extends Epc {
 	static SERIAL_END       = Gdti96.TOTAL_BITS;
 	static SERIAL_BITS      = 41;
 	static MAX_SERIAL       = Utils.getMaxValue(Gdti96.SERIAL_BITS); // 2199023255551
+
+	static TAG_URI = "gdti-96";
 	
-	static TAG_URI_TEMPLATE = (filter, company, document, serial) => {return `urn:epc:tag:gdti-96:${filter}.${company}.${document}.${serial}`}; // F.C.D.S (Filter, Company, Document, Serial)
+	static TAG_URI_TEMPLATE = (filter, company, document, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${document}.${serial}`}; // F.C.D.S (Filter, Company, Document, Serial)
 	static PID_URI_TEMPLATE = (company, document, serial) => {return `urn:epc:id:gdti:${company}.${document}.${serial}`}; // C.D.S   (Company, Document, Serial)
 
 	// Partition table columns: Company prefix, Item Reference
@@ -54,6 +56,25 @@ class Gdti96 extends Epc {
 
 	getType() {
 		return Type.Gdti96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Gdti96();
+				result.setFilter(parseInt(data[0]));
+				result.setPartition(12 - data[1].length);
+				result.setCompanyPrefix(parseInt(data[1]));
+				result.setDocumentReference(parseInt(data[2]));
+				result.setSerial(parseInt(data[3]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.D.S (Filter, Company, Document, Serial)

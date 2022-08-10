@@ -34,8 +34,10 @@ class Gid96 extends Epc {
 	static SERIAL_END     = Gid96.TOTAL_BITS;
 	static SERIAL_BITS    = 36;
 	static MAX_SERIAL     = Utils.getMaxValue(Gid96.SERIAL_BITS);
+
+	static TAG_URI = 'gid-96';
 	
-	static TAG_URI_TEMPLATE = (manager, clazz, serial) => {return `urn:epc:tag:gid-96:${manager}.${clazz}.${serial}`}; // M.C.S (Manager, Class, Serial)
+	static TAG_URI_TEMPLATE = (manager, clazz, serial) => {return `urn:epc:tag:${this.TAG_URI}:${manager}.${clazz}.${serial}`}; // M.C.S (Manager, Class, Serial)
 	static PID_URI_TEMPLATE = (manager, clazz, serial) => {return `urn:epc:id:gid:${manager}.${clazz}.${serial}`}; // M.C.S (Manager, Class, Serial)
 
 	constructor(hexEpc) {	
@@ -61,6 +63,23 @@ class Gid96 extends Epc {
 
 	getType() {
 		return Type.GID96;
+	}
+
+	static fromTagURI(uri) {
+		const value = uri.split(':');
+		try {
+			if(value[3] === this.TAG_URI) {
+				const data = value[4].split('.');
+				const result = new Gid96();
+				result.setManager(parseInt(data[0]));
+				result.setClass(parseInt(data[1]));
+				result.setSerial(parseInt(data[2]));
+				return result;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // M.C.S (Manager, Class, Serial)

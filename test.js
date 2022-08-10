@@ -16,7 +16,7 @@ function test(t, n) {
 
 let time;
 function sgcn96Test(n) {
-    let epc, sgcn;
+    let epc, sgcn, tmp;
     for(let i = 0; i < n; ++i) {
         sgcn = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Sgcn96().setFilter(3).setPartition(6).setSgcn(sgcn);
@@ -25,13 +25,18 @@ function sgcn96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Sgcn96, expected GDTI: ${sgcn}, current: ${epc.getSgcn()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Sgcn96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
 }
 time = test(sgcn96Test, ITERATIONS);
 console.log("Test Sgcn96 time: " + time);
 
 function gdti96Test(n) {
-    let epc, gdti;
+    let epc, gdti, tmp;
     for(let i = 0; i < n; ++i) {
         gdti = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Gdti96().setFilter(3).setPartition(6).setGdti(gdti);
@@ -40,13 +45,38 @@ function gdti96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Gdti96, expected GDTI: ${gdti}, current: ${epc.getGdti()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Gdti96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
 }
 time = test(gdti96Test, ITERATIONS);
 console.log("Test Gdti96 time: " + time);
 
+function gdti174Test(n) {
+    let epc, gdti, tmp;
+    for(let i = 0; i < n; ++i) {
+        gdti = tds.Utils.randomEan(13) + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
+        epc = new tds.Gdti174().setFilter(3).setPartition(6).setGdti(gdti);
+        epc = new tds.Gdti174(epc.toHexString());
+        if(gdti !== epc.getGdti()) {
+            console.log(epc.toIdURI());
+            throw Error(`Gdti174, expected GDTI: ${gdti}, current: ${epc.getGdti()}`);
+        }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Gdti174, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
+    }
+}
+time = test(gdti174Test, ITERATIONS);
+console.log("Test Gdti174 time: " + time);
+
 function cpi96Test(n) {
-    let epc, cpi;
+    let epc, cpi, tmp;
     for(let i = 0; i < n; ++i) {
         cpi = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Cpi96().setFilter(3).setPartition(6).setCpi(cpi);
@@ -56,6 +86,11 @@ function cpi96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Cpi96, expected CPI: ${cpi}, current: ${epc.getCpi()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Cpi96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
     //console.log(epc.toHexString())
 }
@@ -63,7 +98,7 @@ time = test(cpi96Test, ITERATIONS);
 console.log("Test Cpi96 time: " + time);
 
 function gsrn96Test(n) {
-    let epc, gsrn;
+    let epc, gsrn, tmp;
     for(let i = 0; i < n; ++i) {
         gsrn = tds.Utils.randomEan(18);
         epc = new tds.Gsrn96().setFilter(3).setPartition(6).setGsrn(gsrn);
@@ -72,6 +107,11 @@ function gsrn96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Gsrn96, expected GIAI: ${gsrn}, current: ${epc.getGsrn()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Gsrn96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
     //console.log(epc.toHexString())
 }
@@ -79,7 +119,7 @@ time = test(gsrn96Test, ITERATIONS);
 console.log("Test Gsrn96 time: " + time);
 
 function giai96Test(n) {
-    let epc, giai;
+    let epc, giai, tmp;
     for(let i = 0; i < n; ++i) {
         giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Giai96().setFilter(3).setPartition(6).setGiai(giai);
@@ -88,6 +128,11 @@ function giai96Test(n) {
             console.log(epc.toIdURI());
             throw Error(`Giai96, expected GIAI: ${giai}, current: ${epc.getGiai()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Giai96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
     //console.log(epc.toHexString())
 }
@@ -95,15 +140,22 @@ time = test(giai96Test, ITERATIONS);
 console.log("Test Giai96 time: " + time);
 
 function giai202Test(n) {
-    let epc, giai;
+    let epc, giai, tmp;
     for(let i = 0; i < n; ++i) {
         giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Giai202().setFilter(3).setPartition(6).setGiai(giai);
         epc = new tds.Giai202(epc.toHexString());
         if(giai !== epc.getGiai()) {
+            console.log(giai)
+            console.log(epc.toHexString())
             console.log(epc.toIdURI());
             throw Error(`Giai202, expected GIAI: ${giai}, current: ${epc.getGiai()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Giai202, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        } 
     }
     //console.log(epc.toHexString())
 }
@@ -166,7 +218,7 @@ function sscc96Test(n) {
         const uri = epc.toTagURI();
         tmp = tds.fromTagURI(uri);
         if(uri !== tmp.toTagURI()) {
-            throw Error(`Grai96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+            throw Error(`Sscc96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
         } 
     }
     //console.log(epc.toHexString())
@@ -218,7 +270,7 @@ time = test(sgtin198Test, ITERATIONS);
 console.log("Test Sgtin198 time: " + time);
 
 function sgln96Test(n) {
-    let epc, ean;
+    let epc, ean, tmp;
     for(let i = 0; i < n; ++i) {
         ean = tds.Utils.randomEan(13);
         epc = new tds.Sgln96().setFilter(3).setPartition(6).setGln(ean).setExtension(Math.floor(Math.random() * tds.Sgln96.MAX_EXTENSION));
@@ -226,6 +278,11 @@ function sgln96Test(n) {
         if(ean !== epc.getGln()) {
             throw Error(`Sgln96, expected GLN: ${ean}, current: ${epc.getGln()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Sgln96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }   
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -234,14 +291,19 @@ time = test(sgln96Test, ITERATIONS);
 console.log("Test Sgln96 time: " + time);
 
 function sgln195Test(n) {
-    let epc, ean;
+    let epc, ean, tmp;
     for(let i = 0; i < n; ++i) {
         ean = tds.Utils.randomEan(13);
-        epc = new tds.Sgln195().setFilter(3).setPartition(6).setGln(ean).setExtension(tds.Utils.randomHex(tds.Sgln195.MAX_SERIAL_LEN));
+        epc = new tds.Sgln195().setFilter(3).setPartition(6).setGln(ean).setExtension(tds.Utils.randomHex(tds.Sgln195.MAX_EXTENSION_LEN));
         epc = new tds.Sgln195(epc.toHexString());
         if(ean !== epc.getGln()) {
             throw Error(`Sgln195, expected GLN: ${ean}, current: ${epc.getGln()}`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Sgln195, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }  
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -250,7 +312,7 @@ time = test(sgln195Test, ITERATIONS);
 console.log("Test Sgln195 time: " + time);
 
 function gid96Test(n) {
-    let epc;
+    let epc, tmp;
     for(let i = 0; i < n; ++i) {
        
         let manager = Math.floor(Math.random() * tds.Gid96.MAX_MANAGER);
@@ -261,6 +323,11 @@ function gid96Test(n) {
         if(manager !== epc.getManager() || clazz !== epc.getClass() || serial != epc.getSerial()) {
             throw Error(`Gid96, expected: [${manager}, ${clazz}, ${serial}] current: [${epc.getManager()}, ${epc.getClass()}, ${epc.getSerial()}]`);
         }
+        const uri = epc.toTagURI();
+        tmp = tds.fromTagURI(uri);
+        if(uri !== tmp.toTagURI()) {
+            throw Error(`Gid96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
+        }  
     }
     //console.log(epc.toHexString())
 }
