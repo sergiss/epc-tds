@@ -3,3 +3,4 @@ doc
 .DS_Store
 bundle
 build.sh
+node_modules
