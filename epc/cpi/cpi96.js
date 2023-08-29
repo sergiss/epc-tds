@@ -10,11 +10,11 @@
  *
  */
 
-const Utils = require('../utils/utils');
-const { Epc } = require('../epc');
-const { Type } = require('../type');
-const { Partition } = require('../partition');
-
+ const Utils = require('../utils/utils');
+ const { Epc } = require('../epc');
+ const { Type } = require('../type');
+ const { Partition } = require('../partition');
+ 
 class Cpi96 extends Epc {
 
 	static EPC_HEADER = 0x3C;
