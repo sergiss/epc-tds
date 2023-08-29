@@ -17,11 +17,11 @@
  
 class Giai96 extends Epc {
 
-    static EPC_HEADER = 0x34;
+	static EPC_HEADER = 0x34;
 
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
-	static PARTITION_END    = 14;
+	static PARTITION_END	= 14;
 
 	static TAG_URI = 'giai-96';
 	
@@ -108,7 +108,7 @@ class Giai96 extends Epc {
 
 	getGiai() {
 		let partition = Giai96.PARTITIONS[this.getPartition()];
-        let companyPrefix = super.getSegmentString(partition.a);
+		let companyPrefix = super.getSegmentString(partition.a);
 		let asset = super.getSegment(partition.b);
 		return companyPrefix + asset;
 	}
@@ -116,7 +116,7 @@ class Giai96 extends Epc {
 	setGiai(giai) {
 		let partition = Giai96.PARTITIONS[this.getPartition()];  
 		super.setSegment(giai.substring(0, partition.a.digits), partition.a);
-        let tmp = partition.a.digits + partition.b.digits;
+		let tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(giai.substring(partition.a.digits, tmp), partition.b);
 		return this;
 	}
