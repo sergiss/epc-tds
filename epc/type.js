@@ -4,7 +4,7 @@
 */
 
 class Type {
-
+  static CPI96    = "CPI-96";
   static SGTIN96  = "SGTIN-96";
   static SGTIN198 = "SGTIN-198";
   static SSCC96   = "SSCC-96";
