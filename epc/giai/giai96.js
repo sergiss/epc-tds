@@ -21,7 +21,7 @@ class Giai96 extends Epc {
 
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
-	static PARTITION_END	= 14;
+	static PARTITION_END    = 14;
 
 	static TAG_URI = 'giai-96';
 	

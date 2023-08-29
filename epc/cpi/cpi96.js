@@ -2,7 +2,7 @@
  * 96-bit Component / Part Identifier (CPI)
  * 
  * The Component / Part EPC identifier is designed for use by the technical industries (including the
- * automotive sector) for the unique identification of parts or components.
+ * automotive sector) for the unique identification of parts or components. 
  * 
  * Typical use: Technical industries (e.g. automotive ) - components and parts
  * 
@@ -23,9 +23,9 @@ class Cpi96 extends Epc {
 	static PARTITION_OFFSET = 11;
 	static PARTITION_END	= 14;
 	static SERIAL_OFFSET	= 65;
-	static SERIAL_END	   = Cpi96.TOTAL_BITS;
-	static SERIAL_BITS	  = 31;
-	static MAX_SERIAL	   = Utils.getMaxValue(Cpi96.SERIAL_BITS);
+	static SERIAL_END       = Cpi96.TOTAL_BITS;
+	static SERIAL_BITS      = 31;
+	static MAX_SERIAL       = Utils.getMaxValue(Cpi96.SERIAL_BITS);
 
 	static TAG_URI = 'cpi-96';
 
@@ -40,7 +40,7 @@ class Cpi96 extends Epc {
 		new Partition(Cpi96.PARTITION_END, 27,  8, 24, 7),   // 4 27 08 24 7
 		new Partition(Cpi96.PARTITION_END, 24,  7, 27, 8),   // 5 24 07 27 8
 		new Partition(Cpi96.PARTITION_END, 20,  6, 31, 9) ]; // 6 20 06 31 9
-	
+
 	constructor(hexEpc) {
 		super(Cpi96.TOTAL_BITS);
 		if(hexEpc) {
@@ -86,7 +86,7 @@ class Cpi96 extends Epc {
 		let partition = Cpi96.PARTITIONS[this.getPartition()];
 		return Cpi96.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegment(partition.b), this.getSerial());
 	}
-
+	
 	toBarcode() {
 		return this.getCpi();
 	}
