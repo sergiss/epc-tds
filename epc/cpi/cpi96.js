@@ -16,30 +16,30 @@ const { Type } = require('../type');
 const { Partition } = require('../partition');
 
 class Cpi96 extends Epc {
-	
+
 	static EPC_HEADER = 0x3C;
 
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
-	static PARTITION_END	= 14;
-	static SERIAL_OFFSET	= 65;
+	static PARTITION_END    = 14;
+	static SERIAL_OFFSET    = 65;
 	static SERIAL_END       = Cpi96.TOTAL_BITS;
 	static SERIAL_BITS      = 31;
 	static MAX_SERIAL       = Utils.getMaxValue(Cpi96.SERIAL_BITS);
 
 	static TAG_URI = 'cpi-96';
-
+	
 	static TAG_URI_TEMPLATE = (filter, company, part, serial) => {return `urn:epc:tag:${this.TAG_URI}:${filter}.${company}.${part}.${serial}`}; // F.C.P.S (Filter, Company, Part, Serial)
 	static PID_URI_TEMPLATE = (company, part, serial) => {return `urn:epc:id:cpi:${company}.${part}.${serial}`}; // C.P.S   (Company, Part, Serial)
 
 	// Partition table columns: Company prefix, Item Reference
 	static PARTITIONS = [ new Partition(Cpi96.PARTITION_END, 40, 12, 11, 3),   // 0 40 12 11 3
-		new Partition(Cpi96.PARTITION_END, 37, 11, 14, 4),   // 1 37 11 14 4
-		new Partition(Cpi96.PARTITION_END, 34, 10, 17, 5),   // 2 34 10 17 5
-		new Partition(Cpi96.PARTITION_END, 30,  9, 21, 6),   // 3 30 09 21 6
-		new Partition(Cpi96.PARTITION_END, 27,  8, 24, 7),   // 4 27 08 24 7
-		new Partition(Cpi96.PARTITION_END, 24,  7, 27, 8),   // 5 24 07 27 8
-		new Partition(Cpi96.PARTITION_END, 20,  6, 31, 9) ]; // 6 20 06 31 9
+						  new Partition(Cpi96.PARTITION_END, 37, 11, 14, 4),   // 1 37 11 14 4
+						  new Partition(Cpi96.PARTITION_END, 34, 10, 17, 5),   // 2 34 10 17 5
+						  new Partition(Cpi96.PARTITION_END, 30,  9, 21, 6),   // 3 30 09 21 6
+						  new Partition(Cpi96.PARTITION_END, 27,  8, 24, 7),   // 4 27 08 24 7
+						  new Partition(Cpi96.PARTITION_END, 24,  7, 27, 8),   // 5 24 07 27 8						  
+						  new Partition(Cpi96.PARTITION_END, 20,  6, 31, 9) ]; // 6 20 06 31 9
 
 	constructor(hexEpc) {
 		super(Cpi96.TOTAL_BITS);
