@@ -38,10 +38,10 @@ class Cpi96 extends Epc {
 						  new Partition(Cpi96.PARTITION_END, 34, 10, 17, 5),   // 2 34 10 17 5
 						  new Partition(Cpi96.PARTITION_END, 30,  9, 21, 6),   // 3 30 09 21 6
 						  new Partition(Cpi96.PARTITION_END, 27,  8, 24, 7),   // 4 27 08 24 7
-						  new Partition(Cpi96.PARTITION_END, 24,  7, 27, 8),   // 5 24 07 27 8						  
+						  new Partition(Cpi96.PARTITION_END, 24,  7, 27, 8),   // 5 24 07 27 8
 						  new Partition(Cpi96.PARTITION_END, 20,  6, 31, 9) ]; // 6 20 06 31 9
 
-	constructor(hexEpc) {
+	constructor(hexEpc) {	
 		super(Cpi96.TOTAL_BITS);
 		if(hexEpc) {
 			super.setFromHexString(hexEpc);
