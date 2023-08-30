@@ -56,7 +56,7 @@ class Cpi96 extends Epc {
 	}
 
 	getType() {
-		return Type.GPI96;
+		return Type.CPI96;
 	}
 
 	static fromTagURI(uri) {
@@ -113,16 +113,16 @@ class Cpi96 extends Epc {
 	}
 
 	getCpi() {
-        let partition = Cpi96.PARTITIONS[this.getPartition()];
-        let companyPrefix = super.getSegmentString(partition.a);
+		let partition = Cpi96.PARTITIONS[this.getPartition()];
+		let companyPrefix = super.getSegmentString(partition.a);
 		let asset = super.getSegment(partition.b);
 		return companyPrefix + asset;
 	}
 
 	setCpi(cpi) { // ean
-        let partition = Cpi96.PARTITIONS[this.getPartition()];  
+		let partition = Cpi96.PARTITIONS[this.getPartition()];
 		super.setSegment(cpi.substring(0, partition.a.digits), partition.a);
-        let tmp = partition.a.digits + partition.b.digits;
+		let tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(cpi.substring(partition.a.digits, tmp), partition.b);
 		return this;
 	}
@@ -746,7 +746,7 @@ module.exports = { Giai202 };
  
 class Giai96 extends Epc {
 
-	static EPC_HEADER = 0x52;
+	static EPC_HEADER = 0x34;
 
 	static TOTAL_BITS = 96;
 	static PARTITION_OFFSET = 11;
@@ -837,7 +837,7 @@ class Giai96 extends Epc {
 
 	getGiai() {
 		let partition = Giai96.PARTITIONS[this.getPartition()];
-        let companyPrefix = super.getSegmentString(partition.a);
+		let companyPrefix = super.getSegmentString(partition.a);
 		let asset = super.getSegment(partition.b);
 		return companyPrefix + asset;
 	}
@@ -845,7 +845,7 @@ class Giai96 extends Epc {
 	setGiai(giai) {
 		let partition = Giai96.PARTITIONS[this.getPartition()];  
 		super.setSegment(giai.substring(0, partition.a.digits), partition.a);
-        let tmp = partition.a.digits + partition.b.digits;
+		let tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(giai.substring(partition.a.digits, tmp), partition.b);
 		return this;
 	}
@@ -2456,7 +2456,7 @@ module.exports = { Sscc96 };
 */
 
 class Type {
-
+  static CPI96    = "CPI-96";
   static SGTIN96  = "SGTIN-96";
   static SGTIN198 = "SGTIN-198";
   static SSCC96   = "SSCC-96";
@@ -2776,7 +2776,7 @@ function randomHex(len) {
 }
 
 module.exports = { getMaxValue, randomEan, randomHex, hexToByte, computeCheckDigit};
-},{}],"epc-tds":[function(require,module,exports){
+},{}],"/index.js":[function(require,module,exports){
 /*
  * EPC Tag Data Standard
  * 2021 Sergio S. - https://github.com/sergiss/epc-tds
