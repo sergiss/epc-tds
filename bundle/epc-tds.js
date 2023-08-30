@@ -2776,7 +2776,7 @@ function randomHex(len) {
 }
 
 module.exports = { getMaxValue, randomEan, randomHex, hexToByte, computeCheckDigit};
-},{}],"/index.js":[function(require,module,exports){
+},{}],"epc-tds":[function(require,module,exports){
 /*
  * EPC Tag Data Standard
  * 2021 Sergio S. - https://github.com/sergiss/epc-tds
