@@ -55,7 +55,7 @@ class Cpi96 extends Epc {
 	}
 
 	getType() {
-		return Type.GPI96;
+		return Type.CPI96;
 	}
 
 	static fromTagURI(uri) {
@@ -112,16 +112,16 @@ class Cpi96 extends Epc {
 	}
 
 	getCpi() {
-        let partition = Cpi96.PARTITIONS[this.getPartition()];
-        let companyPrefix = super.getSegmentString(partition.a);
+		let partition = Cpi96.PARTITIONS[this.getPartition()];
+		let companyPrefix = super.getSegmentString(partition.a);
 		let asset = super.getSegment(partition.b);
 		return companyPrefix + asset;
 	}
 
 	setCpi(cpi) { // ean
-        let partition = Cpi96.PARTITIONS[this.getPartition()];  
+		let partition = Cpi96.PARTITIONS[this.getPartition()];
 		super.setSegment(cpi.substring(0, partition.a.digits), partition.a);
-        let tmp = partition.a.digits + partition.b.digits;
+		let tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(cpi.substring(partition.a.digits, tmp), partition.b);
 		return this;
 	}
