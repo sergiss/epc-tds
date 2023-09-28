@@ -29,8 +29,9 @@ function sgcn96Test(n) {
         tmp = tds.fromTagURI(uri);
         if(uri !== tmp.toTagURI()) {
             throw Error(`Sgcn96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
-        } 
+        }
     }
+    console.log(epc.toTagURI());
 }
 time = test(sgcn96Test, ITERATIONS);
 console.log("Test Sgcn96 time: " + time);
@@ -105,7 +106,7 @@ function gsrn96Test(n) {
         epc = new tds.Gsrn96(epc.toHexString());
         if(gsrn !== epc.getGsrn()) {
             console.log(epc.toIdURI());
-            throw Error(`Gsrn96, expected GIAI: ${gsrn}, current: ${epc.getGsrn()}`);
+            throw Error(`Gsrn96, expected GSRN: ${gsrn}, current: ${epc.getGsrn()}`);
         }
         const uri = epc.toTagURI();
         tmp = tds.fromTagURI(uri);
@@ -119,7 +120,15 @@ time = test(gsrn96Test, ITERATIONS);
 console.log("Test Gsrn96 time: " + time);
 
 function giai96Test(n) {
+
     let epc, giai, tmp;
+    const tagUri = "urn:epc:tag:giai-96:0.1234567.30000000004214215"
+    epc = tds.fromTagURI(tagUri)
+    const resultTagUri = epc.toTagURI()
+    if (resultTagUri !== tagUri) {
+        throw Error(`Giai96, expected: ${tagUri}, got: ${resultTagUri}`)
+    }
+
     for(let i = 0; i < n; ++i) {
         giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Giai96().setFilter(3).setPartition(6).setGiai(giai);
@@ -141,6 +150,12 @@ console.log("Test Giai96 time: " + time);
 
 function giai202Test(n) {
     let epc, giai, tmp;
+    const tagUri = "urn:epc:tag:giai-202:0.1234567.3000000sergi64237"
+    epc = tds.fromTagURI(tagUri)
+    const resultTagUri = epc.toTagURI()
+    if (resultTagUri !== tagUri) {
+        throw Error(`Giai202, expected: ${tagUri}, got: ${resultTagUri}`)
+    }
     for(let i = 0; i < n; ++i) {
         giai = String(Math.floor(Math.random() * 999999)).padStart(6, '0') + Math.floor(Math.random() * tds.Utils.getMaxValue(16));
         epc = new tds.Giai202().setFilter(3).setPartition(6).setGiai(giai);
@@ -219,7 +234,7 @@ function sscc96Test(n) {
         tmp = tds.fromTagURI(uri);
         if(uri !== tmp.toTagURI()) {
             throw Error(`Sscc96, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
-        } 
+        }
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());
@@ -261,7 +276,7 @@ function sgtin198Test(n) {
         tmp = tds.fromTagURI(uri);
         if(uri !== tmp.toTagURI()) {
             throw Error(`Sgtin198, expected TAG URI: ${uri}, current: ${tmp.toTagURI()}`);
-        }    
+        }
     }
     //console.log(epc.toHexString())
     //console.log(epc.getGtin());

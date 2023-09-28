@@ -63,7 +63,7 @@ class Giai96 extends Epc {
 				result.setFilter(parseInt(data[0]));
 				result.setPartition(12 - data[1].length);
 				result.setCompanyPrefix(parseInt(data[1]));
-				result.setAssetReference(parseInt(data[2]));
+				result.setAssetReference(BigInt(data[2]));
 				return result;
 			}
 		} catch (e) {
@@ -73,13 +73,13 @@ class Giai96 extends Epc {
 	}
 
 	toTagURI() { // F.C.A (Filter, Company, Asset)
-		let partition = Giai96.PARTITIONS[this.getPartition()];
-		return Giai96.TAG_URI_TEMPLATE( this.getFilter(), this.getSegmentString(partition.a), this.getSegment(partition.b));
+		const partition = Giai96.PARTITIONS[this.getPartition()];
+		return Giai96.TAG_URI_TEMPLATE( this.getFilter(), this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
 	}
 
 	toIdURI() { // C.A (Company, Asset)
-		let partition = Giai96.PARTITIONS[this.getPartition()];
-		return Giai96.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegment(partition.b));
+		const partition = Giai96.PARTITIONS[this.getPartition()];
+		return Giai96.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
 	}
 	
 	toBarcode() {
@@ -107,16 +107,16 @@ class Giai96 extends Epc {
 	}
 
 	getGiai() {
-		let partition = Giai96.PARTITIONS[this.getPartition()];
-		let companyPrefix = super.getSegmentString(partition.a);
-		let asset = super.getSegment(partition.b);
+		const partition = Giai96.PARTITIONS[this.getPartition()];
+		const companyPrefix = super.getSegmentString(partition.a);
+		const asset = super.getSegment(partition.b);
 		return companyPrefix + asset;
 	}
 
 	setGiai(giai) {
-		let partition = Giai96.PARTITIONS[this.getPartition()];  
+		const partition = Giai96.PARTITIONS[this.getPartition()];  
 		super.setSegment(giai.substring(0, partition.a.digits), partition.a);
-		let tmp = partition.a.digits + partition.b.digits;
+		const tmp = partition.a.digits + partition.b.digits;
 		super.setSegment(giai.substring(partition.a.digits, tmp), partition.b);
 		return this;
 	}

@@ -10,12 +10,11 @@
  *
  */
 
- const Utils = require('../utils/utils');
  const { Epc } = require('../epc');
  const { Type } = require('../type');
  const { Partition } = require('../partition');
  
-class Giai202 extends Epc { // FIXME: incorrect asset reference
+class Giai202 extends Epc {
 
 	static EPC_HEADER = 0x38;
 
@@ -63,23 +62,23 @@ class Giai202 extends Epc { // FIXME: incorrect asset reference
 				result.setFilter(parseInt(data[0]));
 				result.setPartition(12 - data[1].length);
 				result.setCompanyPrefix(parseInt(data[1]));
-				result.setAssetReference(parseInt(data[2]));
+				result.setAssetReference(data[2]);
 				return result;
 			}
 		} catch (e) {
-			// console.log(e)
+			console.log(e)
 		}
 		throw new Error(`${uri} is not a known EPC tag URI scheme`);
 	}
 
 	toTagURI() { // F.C.A (Filter, Company, Asset)
-		let partition = Giai202.PARTITIONS[this.getPartition()];
-		return Giai202.TAG_URI_TEMPLATE( this.getFilter(), this.getSegmentString(partition.a), this.getSegment(partition.b));
+		const partition = Giai202.PARTITIONS[this.getPartition()];
+		return Giai202.TAG_URI_TEMPLATE(this.getFilter(), this.getSegmentString(partition.a), this.getAssetReference());
 	}
 
 	toIdURI() { // C.A (Company, Asset)
-		let partition = Giai202.PARTITIONS[this.getPartition()];
-		return Giai202.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegment(partition.b));
+		const partition = Giai202.PARTITIONS[this.getPartition()];
+		return Giai202.PID_URI_TEMPLATE(this.getSegmentString(partition.a), this.getAssetReference());
 	}
 	
 	toBarcode() {
@@ -107,17 +106,17 @@ class Giai202 extends Epc { // FIXME: incorrect asset reference
 	}
 
 	getGiai() {
-		let partition = Giai202.PARTITIONS[this.getPartition()];
-        let companyPrefix = super.getSegmentString(partition.a);
-		let asset = super.getSegment(partition.b);
+		const partition = Giai202.PARTITIONS[this.getPartition()];
+        const companyPrefix = super.getSegmentString(partition.a);
+		const asset = super.getString(partition.b.start, partition.b.end, 7);
 		return  companyPrefix + asset;
 	}
 
 	setGiai(giai) {
-		let partition = Giai202.PARTITIONS[this.getPartition()];  
+		const partition = Giai202.PARTITIONS[this.getPartition()];  
 		super.setSegment(giai.substring(0, partition.a.digits), partition.a);
-        let tmp = partition.a.digits + partition.b.digits;
-		super.setSegment(giai.substring(partition.a.digits, tmp), partition.b);
+        const tmp = partition.a.digits + partition.b.digits;
+		super.setString(giai.substring(partition.a.digits, tmp), partition.b.start, partition.b.end, 7);
 		return this;
 	}
 
@@ -131,11 +130,13 @@ class Giai202 extends Epc { // FIXME: incorrect asset reference
 	}
 
 	getAssetReference() {
-		return super.getSegment(Giai202.PARTITIONS[this.getPartition()].b);
+		const segment = Giai202.PARTITIONS[this.getPartition()].b;
+		return super.getString(segment.start, segment.end, 7);
 	}
 
 	setAssetReference(value) {
-		super.setSegment(value, Giai202.PARTITIONS[this.getPartition()].b);
+		const segment = Giai202.PARTITIONS[this.getPartition()].b;
+		super.setString(value, segment.start, segment.end, 7);
 		return this;
 	}
 
