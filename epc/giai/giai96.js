@@ -74,12 +74,12 @@ class Giai96 extends Epc {
 
 	toTagURI() { // F.C.A (Filter, Company, Asset)
 		const partition = Giai96.PARTITIONS[this.getPartition()];
-		return Giai96.TAG_URI_TEMPLATE( this.getFilter(), this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
+		return Giai96.TAG_URI_TEMPLATE(this.getFilter(), this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
 	}
 
 	toIdURI() { // C.A (Company, Asset)
 		const partition = Giai96.PARTITIONS[this.getPartition()];
-		return Giai96.PID_URI_TEMPLATE( this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
+		return Giai96.PID_URI_TEMPLATE(this.getSegmentString(partition.a), this.getSegmentBigInt(partition.b));
 	}
 	
 	toBarcode() {
@@ -109,7 +109,7 @@ class Giai96 extends Epc {
 	getGiai() {
 		const partition = Giai96.PARTITIONS[this.getPartition()];
 		const companyPrefix = super.getSegmentString(partition.a);
-		const asset = super.getSegment(partition.b);
+		const asset = super.getSegmentBigInt(partition.b);
 		return companyPrefix + asset;
 	}
 
@@ -131,7 +131,7 @@ class Giai96 extends Epc {
 	}
 
 	getAssetReference() {
-		return super.getSegment(Giai96.PARTITIONS[this.getPartition()].b);
+		return super.getSegmentBigInt(Giai96.PARTITIONS[this.getPartition()].b);
 	}
 
 	setAssetReference(value) {

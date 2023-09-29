@@ -77,6 +77,10 @@ class Epc extends BitArray {
 		return this;
 	}
 
+	getSegmentBigInt(segment) {
+		return super.getBigInt(segment.start, segment.end);
+	}
+
 	getSegment(segment) {
 		return super.get(segment.start, segment.end);
 	}
@@ -88,12 +92,13 @@ class Epc extends BitArray {
 		super.set(value, segment.start, segment.end);
 	}
 
-	getSegmentString(segment) { // Return segment as number string
-		return String(this.getSegment(segment)).padStart(segment.digits, '0');
-	}
-
-	getSegmentBigInt(segment) {
-		return super.getBigInt(segment.start, segment.end);
+	/**
+	 * Return segment as string with leading zeros
+	 * @param {*} segment
+	 * @returns
+	 */
+	getSegmentString(segment) { 
+		return String(this.getSegmentBigInt(segment)).padStart(segment.digits, '0');
 	}
 
 }
