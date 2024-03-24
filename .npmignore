@@ -2,5 +2,6 @@ doc
 *.pdf
 .DS_Store
 bundle
+src
 build.sh
 node_modules

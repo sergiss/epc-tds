@@ -4,9 +4,8 @@
 * 2024 Sergio S. - https://github.com/sergiss/epc-tds
 */
 
-"use strict";
-
-const tds = require("./dist");
+import tds from ".";
+import Epc from "./epc";
 
 // ---------------------------------
 // ****** Decode from hex EPC ****** 
@@ -16,10 +15,6 @@ let epc = tds.valueOf("3074257BF7194E4000001A85"); // sgtin-96
 console.log("** SGTIN-96 **")
 console.log("Type: " + epc.getType()); // TDS ID
 console.log("Filter: " + epc.getFilter()); // filter index
-console.log("Partition: " + epc.getPartition()); // partition index
-console.log("CompanyPrefix: " +  epc.getCompanyPrefix());
-console.log("ItemReference: " + epc.getItemReference());
-console.log("GTIN(EAN): " + epc.getGtin()); // ean
 console.log("HexEPC: " + epc.toHexString()); // HEX EPC
 console.log("Tag URI: " + epc.toTagURI());
 console.log("");
@@ -27,11 +22,8 @@ console.log("");
 // e.g. 2: SSCC-96
 epc = tds.valueOf("317A7202CC164BA20B000000"); // sscc-96
 console.log("** SSCC-96 **")
+console.log("Type: " + epc.getType()); // TDS ID
 console.log("Filter: " + epc.getFilter()); // filter index
-console.log("Partition: " + epc.getPartition()); // partition index
-console.log("CompanyPrefix: " +  epc.getCompanyPrefix());
-console.log("SerialReference: " + epc.getSerialReference());
-console.log("SSCC(EAN): " + epc.getSscc()); // ean
 console.log("HexEPC: " + epc.toHexString()); // HEX EPC
 console.log("Tag URI: " + epc.toTagURI());
 console.log();
@@ -40,7 +32,7 @@ console.log();
 // ****** Encode Sgtin96 from values ******
 // ----------------------------------------
 // e.g. 1: EAN + Serial
-let sgtin = new tds.Sgtin96().setFilter(3)
+let sgtin: Epc<any> = new tds.Sgtin96().setFilter(3)
                          .setPartition(5)
                          .setGtin("00001234523457")
                          .setSerial(1823342345);

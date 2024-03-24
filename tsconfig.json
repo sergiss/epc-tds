@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // Module resolution options
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "isolatedModules": false,
+
+    // Strict options and verification
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "allowJs": false,
+
+    // Output options
+    "target": "es6",
+    "outDir": "dist",
+    "declaration": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -1,12 +1,15 @@
 {
   "name": "epc-tds",
   "version": "1.4.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "cleanBuild": "npm run clean && npm run build",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
   },
   "keywords": [
     "EPC",
@@ -45,6 +48,6 @@
   },
   "homepage": "https://github.com/sergiss/epc-tds#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "typescript": "^5.4.3"
   }
 }
