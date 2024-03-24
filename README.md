@@ -1,6 +1,6 @@
 # epc-tds
 
-EPC Tag Data Standard encoding and decoding library, written in javascript (Node.JS and Frontend)
+EPC Tag Data Standard encoding and decoding library, offering full compatibility across JavaScript and TypeScript environments, including both Node.js and frontend applications.
 
 Simple, very fast and easy to use ;)
 
