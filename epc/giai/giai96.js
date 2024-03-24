@@ -10,7 +10,6 @@
  *
  */
 
- const Utils = require('../utils/utils');
  const { Epc } = require('../epc');
  const { Type } = require('../type');
  const { Partition } = require('../partition');

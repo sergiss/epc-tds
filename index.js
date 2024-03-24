@@ -98,6 +98,7 @@ function valueOf(hexEpc) {
   }
 }
 
-exports = module.exports = { Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Gdti96, Gdti174, Sgcn96, Utils };
-exports.valueOf = valueOf;
-exports.fromTagURI = fromTagURI;
+exports = module.exports = {
+  Utils, valueOf, fromTagURI,
+  Sgtin96, Sgtin198, Sgln96, Sgln195, Sscc96, Grai96, Grai170, Gid96, Giai96, Giai202, Gsrn96, Cpi96, Gdti96, Gdti174, Sgcn96
+};
