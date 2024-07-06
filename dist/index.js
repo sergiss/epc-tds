@@ -62,7 +62,6 @@ function fromTagURI(uri) {
     }
 }
 function valueOf(hexEpc) {
-    console.log(hexEpc);
     let header = utils_1.default.hexToByte(hexEpc, 0); // first byte of EPC
     switch (header) {
         case grai96_1.Grai96.EPC_HEADER:

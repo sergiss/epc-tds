@@ -137,10 +137,10 @@ Grai96.TAG_URI_TEMPLATE = (filter, company, asset, serial) => { return `urn:epc:
 // C.A.S   (Company, AssetType, Serial)
 Grai96.PID_URI_TEMPLATE = (company, asset, serial) => { return `urn:epc:id:grai:${company}.${asset}.${serial}`; };
 // Partition table columns: Company prefix, Asset Type
-Grai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 5),
+Grai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 0), // 0 40 12 04 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 1), // 1 37 11 07 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 2), // 2 34 10 10 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 3), // 3 30 09 14 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 4), // 4 27 08 17 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 5), // 5 24 07 20 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 24, 6)]; // 6 20 06 24 6

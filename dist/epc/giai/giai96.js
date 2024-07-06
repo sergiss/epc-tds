@@ -117,10 +117,10 @@ Giai96.TAG_URI_TEMPLATE = (filter, company, asset) => { return `urn:epc:tag:${_a
 // C.A (Company, Asset)
 Giai96.PID_URI_TEMPLATE = (company, asset) => { return `urn:epc:id:giai:${company}.${asset}`; };
 // Partition table columns: Company prefix, Asset Type
-Giai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 42, 13),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 45, 14),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 48, 15),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 52, 16),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 55, 17),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 58, 18),
+Giai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 42, 13), // 0 40 12 42 13
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 45, 14), // 1 37 11 45 14
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 48, 15), // 2 34 10 48 15 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 52, 16), // 3 30 09 52 16 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 55, 17), // 4 27 08 55 17 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 58, 18), // 5 24 07 58 18 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 62, 19)]; // 6 20 06 62 19

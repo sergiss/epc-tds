@@ -136,12 +136,12 @@ Cpi96.TAG_URI_TEMPLATE = (filter, company, part, serial) => { return `urn:epc:ta
 // C.P.S   (Company, Part, Serial)
 Cpi96.PID_URI_TEMPLATE = (company, part, serial) => { return `urn:epc:id:cpi:${company}.${part}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Cpi96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 17, 5),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 27, 8),
+Cpi96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 11, 3), // 0 40 12 11 3
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 14, 4), // 1 37 11 14 4
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 17, 5), // 2 34 10 17 5 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 21, 6), // 3 30 09 21 6 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 24, 7), // 4 27 08 24 7 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 27, 8), // 5 24 07 27 8 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 31, 9)]; // 6 20 06 31 9
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],2:[function(require,module,exports){
@@ -378,12 +378,12 @@ Gdti174.TAG_URI_TEMPLATE = (filter, company, document, serial) => { return `urn:
 // C.D.S   (Company, Document, Serial)
 Gdti174.PID_URI_TEMPLATE = (company, document, serial) => { return `urn:epc:id:gdti:${company}.${document}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Gdti174.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5),
+Gdti174.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0), // 0 40 12 01 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1), // 1 37 11 04 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2), // 2 34 10 07 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3), // 3 30 09 11 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4), // 4 27 08 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5), // 5 24 07 17 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 21, 6)]; // 6 20 06 21 6
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],4:[function(require,module,exports){
@@ -526,12 +526,12 @@ Gdti96.TAG_URI_TEMPLATE = (filter, company, document, serial) => { return `urn:e
 // C.D.S   (Company, Document, Serial)
 Gdti96.PID_URI_TEMPLATE = (company, document, serial) => { return `urn:epc:id:gdti:${company}.${document}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Gdti96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5),
+Gdti96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0), // 0 40 12 01 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1), // 1 37 11 04 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2), // 2 34 10 07 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3), // 3 30 09 11 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4), // 4 27 08 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5), // 5 24 07 17 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 21, 6)]; // 6 20 06 21 6
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],5:[function(require,module,exports){
@@ -656,12 +656,12 @@ Giai202.TAG_URI_TEMPLATE = (filter, company, asset) => { return `urn:epc:tag:${_
 // C.A (Company, Asset)
 Giai202.PID_URI_TEMPLATE = (company, asset) => { return `urn:epc:id:giai:${company}.${asset}`; };
 // Partition table columns: Company prefix, Asset Type
-Giai202.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 148, 18),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 151, 19),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 154, 20),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 158, 21),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 161, 22),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 164, 23),
+Giai202.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 148, 18), // 0 40 12 148 18
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 151, 19), // 1 37 11 151 19
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 154, 20), // 2 34 10 154 20 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 158, 21), // 3 30 09 158 21 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 161, 22), // 4 27 08 161 22 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 164, 23), // 5 24 07 164 23 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 168, 24)]; // 6 20 06 168 24
 
 },{"../epc":2,"../partition":12,"../type":20}],6:[function(require,module,exports){
@@ -784,12 +784,12 @@ Giai96.TAG_URI_TEMPLATE = (filter, company, asset) => { return `urn:epc:tag:${_a
 // C.A (Company, Asset)
 Giai96.PID_URI_TEMPLATE = (company, asset) => { return `urn:epc:id:giai:${company}.${asset}`; };
 // Partition table columns: Company prefix, Asset Type
-Giai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 42, 13),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 45, 14),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 48, 15),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 52, 16),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 55, 17),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 58, 18),
+Giai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 42, 13), // 0 40 12 42 13
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 45, 14), // 1 37 11 45 14
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 48, 15), // 2 34 10 48 15 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 52, 16), // 3 30 09 52 16 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 55, 17), // 4 27 08 55 17 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 58, 18), // 5 24 07 58 18 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 62, 19)]; // 6 20 06 62 19
 
 },{"../epc":2,"../partition":12,"../type":20}],7:[function(require,module,exports){
@@ -1203,12 +1203,12 @@ Grai96.TAG_URI_TEMPLATE = (filter, company, asset, serial) => { return `urn:epc:
 // C.A.S   (Company, AssetType, Serial)
 Grai96.PID_URI_TEMPLATE = (company, asset, serial) => { return `urn:epc:id:grai:${company}.${asset}.${serial}`; };
 // Partition table columns: Company prefix, Asset Type
-Grai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 5),
+Grai96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 0), // 0 40 12 04 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 1), // 1 37 11 07 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 2), // 2 34 10 10 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 3), // 3 30 09 14 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 4), // 4 27 08 17 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 5), // 5 24 07 20 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 24, 6)]; // 6 20 06 24 6
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],10:[function(require,module,exports){
@@ -1336,12 +1336,12 @@ Gsrn96.TAG_URI_TEMPLATE = (filter, company, service) => { return `urn:epc:tag:${
 // C.S (Company, Service)
 Gsrn96.PID_URI_TEMPLATE = (company, asset) => { return `urn:epc:id:gsrn:${company}.${asset}`; };
 // Partition table columns: Company prefix, Service Reference
-Gsrn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10),
+Gsrn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5), // 0 40 12 18 5
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6), // 1 37 11 21 6
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7), // 2 34 10 24 7 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8), // 3 30 09 28 8 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9), // 4 27 08 31 9 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10), // 5 24 07 34 10 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 38, 11)]; // 6 20 06 38 11
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],11:[function(require,module,exports){
@@ -1545,12 +1545,12 @@ Sgcn96.TAG_URI_TEMPLATE = (filter, company, coupon, serial) => { return `urn:epc
 // C.C.S   (Company, Coupon, Serial)
 Sgcn96.PID_URI_TEMPLATE = (company, coupon, serial) => { return `urn:epc:id:sgcn:${company}.${coupon}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Sgcn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5),
+Sgcn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0), // 0 40 12 01 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1), // 1 37 11 04 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2), // 2 34 10 07 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3), // 3 30 09 11 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4), // 4 27 08 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5), // 5 24 07 17 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 21, 6)]; // 6 20 06 21 6
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],15:[function(require,module,exports){
@@ -1830,12 +1830,12 @@ Sgln96.TAG_URI_TEMPLATE = (filter, company, location, extension) => { return `ur
 // C.L.E   (Company, Location, Extension)
 Sgln96.PID_URI_TEMPLATE = (company, location, extension) => { return `urn:epc:id:sgln:${company}.${location}.${extension}`; };
 // Partition table columns: Company prefix, Location Reference
-Sgln96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5),
+Sgln96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 1, 0), // 0 40 12 01 0
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 4, 1), // 1 37 11 04 1
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 7, 2), // 2 34 10 07 2 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 11, 3), // 3 30 09 11 3 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 14, 4), // 4 27 08 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 17, 5), // 5 24 07 17 5 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 21, 6)]; // 6 20 06 21 6
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],17:[function(require,module,exports){
@@ -2116,12 +2116,12 @@ Sgtin96.TAG_URI_TEMPLATE = (filter, company, item, serial) => { return `urn:epc:
 // C.I.S   (Company, Item, Serial)
 Sgtin96.PID_URI_TEMPLATE = (company, item, serial) => { return `urn:epc:id:sgtin:${company}.${item}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Sgtin96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 3),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 5),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 6),
+Sgtin96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 1), // 0 40 12 04 1
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 2), // 1 37 11 07 2
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 3), // 2 34 10 10 3 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 4), // 3 30 09 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 5), // 4 27 08 17 5 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 6), // 5 24 07 20 6 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 24, 7)]; // 6 20 06 24 7
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],19:[function(require,module,exports){
@@ -2250,12 +2250,12 @@ Sscc96.TAG_URI_TEMPLATE = (filter, company, serial) => { return `urn:epc:tag:${_
 // C.S   (Company, Serial)
 Sscc96.PID_URI_TEMPLATE = (company, serial) => { return `urn:epc:id:sscc:${company}.${serial}`; };
 // Partition table columns: Company prefix, Serial Reference
-Sscc96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10),
+Sscc96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5), // 0 40 12 18 05
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6), // 1 37 11 21 06
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7), // 2 34 10 24 07 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8), // 3 30 09 28 08 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9), // 4 27 08 31 09 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10), // 5 24 07 34 10 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 38, 11)]; // 6 20 06 38 11
 
 },{"../epc":2,"../partition":12,"../type":20,"../utils":22}],20:[function(require,module,exports){
@@ -2521,11 +2521,11 @@ const DEC_TABLE = [
     -1, -1, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ];
 const NUMBER_TABLE = [
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, 0, 1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 00 - 09
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 10 - 19
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 20 - 29
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, // 30 - 39
+    -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, // 40 - 49
     2, 3, 4, 5, 6, 7, 8, 9, -1, -1 // 50 - 59
 ];
 /**
@@ -2679,7 +2679,6 @@ function fromTagURI(uri) {
     }
 }
 function valueOf(hexEpc) {
-    console.log(hexEpc);
     let header = utils_1.default.hexToByte(hexEpc, 0); // first byte of EPC
     switch (header) {
         case grai96_1.Grai96.EPC_HEADER:

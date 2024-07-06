@@ -122,10 +122,10 @@ Gsrn96.TAG_URI_TEMPLATE = (filter, company, service) => { return `urn:epc:tag:${
 // C.S (Company, Service)
 Gsrn96.PID_URI_TEMPLATE = (company, asset) => { return `urn:epc:id:gsrn:${company}.${asset}`; };
 // Partition table columns: Company prefix, Service Reference
-Gsrn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10),
+Gsrn96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5), // 0 40 12 18 5
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6), // 1 37 11 21 6
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7), // 2 34 10 24 7 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8), // 3 30 09 28 8 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9), // 4 27 08 31 9 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10), // 5 24 07 34 10 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 38, 11)]; // 6 20 06 38 11

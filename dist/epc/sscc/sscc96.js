@@ -123,10 +123,10 @@ Sscc96.TAG_URI_TEMPLATE = (filter, company, serial) => { return `urn:epc:tag:${_
 // C.S   (Company, Serial)
 Sscc96.PID_URI_TEMPLATE = (company, serial) => { return `urn:epc:id:sscc:${company}.${serial}`; };
 // Partition table columns: Company prefix, Serial Reference
-Sscc96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10),
+Sscc96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 18, 5), // 0 40 12 18 05
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 21, 6), // 1 37 11 21 06
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 24, 7), // 2 34 10 24 07 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 28, 8), // 3 30 09 28 08 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 31, 9), // 4 27 08 31 09 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 34, 10), // 5 24 07 34 10 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 38, 11)]; // 6 20 06 38 11

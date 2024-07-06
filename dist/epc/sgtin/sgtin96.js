@@ -134,10 +134,10 @@ Sgtin96.TAG_URI_TEMPLATE = (filter, company, item, serial) => { return `urn:epc:
 // C.I.S   (Company, Item, Serial)
 Sgtin96.PID_URI_TEMPLATE = (company, item, serial) => { return `urn:epc:id:sgtin:${company}.${item}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Sgtin96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 1),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 2),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 3),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 5),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 6),
+Sgtin96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 4, 1), // 0 40 12 04 1
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 7, 2), // 1 37 11 07 2
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 10, 3), // 2 34 10 10 3 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 14, 4), // 3 30 09 14 4 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 17, 5), // 4 27 08 17 5 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 20, 6), // 5 24 07 20 6 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 24, 7)]; // 6 20 06 24 7

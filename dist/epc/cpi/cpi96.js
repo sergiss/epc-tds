@@ -135,10 +135,10 @@ Cpi96.TAG_URI_TEMPLATE = (filter, company, part, serial) => { return `urn:epc:ta
 // C.P.S   (Company, Part, Serial)
 Cpi96.PID_URI_TEMPLATE = (company, part, serial) => { return `urn:epc:id:cpi:${company}.${part}.${serial}`; };
 // Partition table columns: Company prefix, Item Reference
-Cpi96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 11, 3),
-    new partition_1.Partition(_a.PARTITION_END, 37, 11, 14, 4),
-    new partition_1.Partition(_a.PARTITION_END, 34, 10, 17, 5),
-    new partition_1.Partition(_a.PARTITION_END, 30, 9, 21, 6),
-    new partition_1.Partition(_a.PARTITION_END, 27, 8, 24, 7),
-    new partition_1.Partition(_a.PARTITION_END, 24, 7, 27, 8),
+Cpi96.PARTITIONS = [new partition_1.Partition(_a.PARTITION_END, 40, 12, 11, 3), // 0 40 12 11 3
+    new partition_1.Partition(_a.PARTITION_END, 37, 11, 14, 4), // 1 37 11 14 4
+    new partition_1.Partition(_a.PARTITION_END, 34, 10, 17, 5), // 2 34 10 17 5 
+    new partition_1.Partition(_a.PARTITION_END, 30, 9, 21, 6), // 3 30 09 21 6 
+    new partition_1.Partition(_a.PARTITION_END, 27, 8, 24, 7), // 4 27 08 24 7 
+    new partition_1.Partition(_a.PARTITION_END, 24, 7, 27, 8), // 5 24 07 27 8 
     new partition_1.Partition(_a.PARTITION_END, 20, 6, 31, 9)]; // 6 20 06 31 9
